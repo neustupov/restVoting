@@ -2,12 +2,9 @@ package ru.neustupov.restvoting.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 import ru.neustupov.restvoting.model.Meal;
 import ru.neustupov.restvoting.repository.MealRepository;
-import ru.neustupov.restvoting.to.MealTo;
-import ru.neustupov.restvoting.util.MealUtil;
 import ru.neustupov.restvoting.util.exception.NotFoundException;
 
 import java.util.List;
@@ -46,15 +43,6 @@ public class MealServiceImpl implements MealService{
         Assert.notNull(meal, "meal must not be null");
         Assert.notNull(menuId, "menuId must not be null");
         checkNotFoundWithId(repository.save(meal, menuId), meal.getId());
-    }
-
-    @Transactional
-    @Override
-    public void update(MealTo mealTo, int menuId) {
-        Assert.notNull(mealTo, "meal must not be null");
-        Assert.notNull(menuId, "menuId must not be null");
-        Meal meal = get(mealTo.getId(), menuId);
-        checkNotFoundWithId(repository.save(MealUtil.updateFromTo(meal, mealTo), menuId), mealTo.getId());
     }
 
     @Override

@@ -54,7 +54,7 @@ public class MenuServiceImpl implements MenuService {
 
     @Override
     public Menu getTodaysMenuWithMeals(int restId) {
-            return repository.getTodaysMenuWithMeals(restId, Date.valueOf(LocalDate.now()));
+        return repository.getTodaysMenuWithMeals(restId, Date.valueOf(LocalDate.now()));
     }
 
     @Override

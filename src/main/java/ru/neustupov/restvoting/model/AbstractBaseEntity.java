@@ -1,13 +1,13 @@
 package ru.neustupov.restvoting.model;
 
 import org.hibernate.Hibernate;
-import ru.neustupov.restvoting.HasId;
+import org.springframework.data.domain.Persistable;
 
 import javax.persistence.*;
 
 @MappedSuperclass
 @Access(AccessType.FIELD)
-public abstract class AbstractBaseEntity implements HasId {
+public abstract class AbstractBaseEntity implements Persistable<Integer> {
 
     public static final int START_SEQ = 100000;
 
@@ -28,9 +28,13 @@ public abstract class AbstractBaseEntity implements HasId {
         return id;
     }
 
-    @Override
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    @Override
+    public boolean isNew() {
+        return this.id == null;
     }
 
     @Override
