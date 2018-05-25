@@ -32,6 +32,8 @@
         <hibernate.version>5.2.12.Final</hibernate.version>
         <hibernate-validator.version>6.0.7.Final</hibernate-validator.version>
 
+        <javax-el.version>3.0.1-b08</javax-el.version>
+
         <!--Json-->
         <jackson-json.version>2.9.3</jackson-json.version>
 
@@ -155,6 +157,14 @@
             <groupId>org.hibernate.validator</groupId>
             <artifactId>hibernate-validator</artifactId>
             <version>${hibernate-validator.version}</version>
+        </dependency>
+
+        <!--http://hibernate.org/validator/documentation/getting-started/#unified-expression-language-el-->
+        <dependency>
+            <groupId>org.glassfish</groupId>
+            <artifactId>javax.el</artifactId>
+            <version>${javax-el.version}</version>
+            <scope>provided</scope>
         </dependency>
 
         <!--Web-->

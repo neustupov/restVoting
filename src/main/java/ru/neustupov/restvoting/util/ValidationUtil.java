@@ -56,9 +56,9 @@ public class ValidationUtil {
         return result;
     }
 
-    public static void checkTimeForVote(){
-        if( LocalTime.now().getHour() > 11 && LocalTime.now().getMinute() > 0 ){
-            throw new DateTimeException("time is after 11");
+    public static void checkTimeForVote(LocalTime stopTime){
+        if( LocalTime.now().isAfter(stopTime) ){
+            throw new DateTimeException("time is after Stop Time");
         }
     }
 }

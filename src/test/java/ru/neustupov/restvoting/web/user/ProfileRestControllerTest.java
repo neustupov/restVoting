@@ -42,7 +42,7 @@ public class ProfileRestControllerTest extends AbstractControllerTest {
 
     @Test
     public void testUpdate() throws Exception {
-        User updated = new User(USER_ID, "newName", "newPassword", Date.from(Instant.now()), EnumSet.of(Role.ROLE_USER));
+        User updated = new User(USER_ID, "newName", "user@yandex.ru","newPassword", Date.from(Instant.now()), EnumSet.of(Role.ROLE_USER));
         mockMvc.perform(put(REST_URL).contentType(MediaType.APPLICATION_JSON)
                 .content(JsonUtil.writeValue(updated)))
                 .andDo(print())

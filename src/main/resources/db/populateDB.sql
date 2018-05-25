@@ -6,9 +6,9 @@ DELETE FROM menus;
 DELETE FROM restaurants;
 ALTER SEQUENCE global_seq RESTART WITH 100000;
 
-INSERT INTO USERS (name, password) VALUES
-  ('User', 'password'),
-  ('Admin', 'admin');
+INSERT INTO USERS (name, email, password) VALUES
+  ('User', 'user@yandex.ru','password'),
+  ('Admin', 'admin@yandex.ru','admin');
 
 INSERT INTO USER_ROLES (role, user_id) VALUES
   ('ROLE_USER', 100000),
