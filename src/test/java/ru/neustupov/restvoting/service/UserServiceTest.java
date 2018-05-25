@@ -1,5 +1,6 @@
 package ru.neustupov.restvoting.service;
 
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -89,6 +90,20 @@ public class UserServiceTest extends AbstractServiceTest {
         validateRootCause(() -> service.create(new User(100500, "TestUser", "new@yandex.ru","Pass", Date.from(Instant.now()), EnumSet.of(Role.ROLE_USER))), ConstraintViolationException.class);
         validateRootCause(() -> service.create(new User(100500, "TestUser", "new@yandex.ru","1234567890qwertyuiopsdfghjklzxcvbnmnbvcxzasdfghjklpoiuytrewq12345", Date.from(Instant.now()), EnumSet.of(Role.ROLE_USER))), ConstraintViolationException.class);
         validateRootCause(() -> service.create(new User(100500, "TestUser", "new@yandex.ru","Password", null, EnumSet.of(Role.ROLE_USER))), ConstraintViolationException.class);
+    }
+
+    @Test
+    public void testEnable() {
+        service.enable(USER_ID, false);
+        Assert.assertFalse(service.get(USER_ID).isEnabled());
+        service.enable(USER_ID, true);
+        Assert.assertTrue(service.get(USER_ID).isEnabled());
+    }
+
+    @Test
+    public void getByEmail() throws Exception {
+        User user = service.getByEmail("admin@yandex.ru");
+        assertMatch(user, ADMIN);
     }
 
 }

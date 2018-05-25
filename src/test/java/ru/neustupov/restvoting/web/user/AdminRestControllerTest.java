@@ -78,4 +78,12 @@ public class AdminRestControllerTest extends AbstractControllerTest{
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
                 .andExpect(contentJson(ADMIN, USER)));
     }
+
+    @Test
+    public void testGetByEmail() throws Exception {
+        mockMvc.perform(get(REST_URL + "by?email=" + USER.getEmail()))
+                .andExpect(status().isOk())
+                .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
+                .andExpect(contentJson(USER));
+    }
 }

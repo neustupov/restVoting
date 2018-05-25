@@ -52,4 +52,10 @@ public class AdminRestController extends AbstractUserController{
     public void update(@RequestBody User user, @PathVariable("id") int id) {
         super.update(user, id);
     }
+
+    @Override
+    @GetMapping(value = "/by", produces = MediaType.APPLICATION_JSON_VALUE)
+    public User getByMail(@RequestParam("email") String email) {
+        return super.getByMail(email);
+    }
 }

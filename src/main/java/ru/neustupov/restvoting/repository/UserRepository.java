@@ -20,4 +20,7 @@ public interface UserRepository {
     default User getWithVotes(int id){
         throw new UnsupportedOperationException();
     }
+
+    // null if not found
+    User getByEmail(String email);
 }
