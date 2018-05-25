@@ -1,5 +1,6 @@
 package ru.neustupov.restvoting.web.user;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -41,6 +42,7 @@ public class AdminRestController extends AbstractUserController{
 
     @Override
     @DeleteMapping(value = "/{id}")
+    @ResponseStatus(value = HttpStatus.NO_CONTENT)
     public void delete(@PathVariable("id") int id) {
         super.delete(id);
     }
@@ -49,5 +51,11 @@ public class AdminRestController extends AbstractUserController{
     @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
     public void update(@RequestBody User user, @PathVariable("id") int id) {
         super.update(user, id);
+    }
+
+    @Override
+    @GetMapping(value = "/by", produces = MediaType.APPLICATION_JSON_VALUE)
+    public User getByMail(@RequestParam("email") String email) {
+        return super.getByMail(email);
     }
 }

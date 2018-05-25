@@ -1,5 +1,6 @@
 package ru.neustupov.restvoting.web.restaurant;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -47,6 +48,7 @@ public class AdminRestaurantRestController extends AbstractRestaurantController 
 
     @Override
     @DeleteMapping(value = "/{id}")
+    @ResponseStatus(value = HttpStatus.NO_CONTENT)
     public void delete(@PathVariable("id") int id) {
         super.delete(id);
     }

@@ -2,7 +2,7 @@ package ru.neustupov.restvoting.web.menu;
 
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
-import ru.neustupov.votingforrestaurants.model.Menu;
+import ru.neustupov.restvoting.model.Menu;
 
 import java.util.List;
 
