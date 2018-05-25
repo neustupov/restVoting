@@ -27,7 +27,6 @@
         <!--Spring-->
         <spring.version>5.0.2.RELEASE</spring.version>
         <spring-data-jpa.version>2.0.2.RELEASE</spring-data-jpa.version>
-        <spring-security.version>5.0.0.RELEASE</spring-security.version>
 
         <!-- Hibernate -->
         <hibernate.version>5.2.12.Final</hibernate.version>
@@ -127,21 +126,6 @@
             <version>${spring.version}</version>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/javax.servlet/servlet-api -->
-        <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>servlet-api</artifactId>
-            <version>2.5</version>
-            <scope>provided</scope>
-        </dependency>
-
-        <!--security-->
-        <dependency>
-            <groupId>org.springframework.security</groupId>
-            <artifactId>spring-security-core</artifactId>
-            <version>${spring-security.version}</version>
-        </dependency>
-
         <!--DB-->
         <dependency>
             <groupId>org.hsqldb</groupId>
@@ -171,6 +155,14 @@
             <groupId>org.hibernate.validator</groupId>
             <artifactId>hibernate-validator</artifactId>
             <version>${hibernate-validator.version}</version>
+        </dependency>
+
+        <!--Web-->
+        <dependency>
+            <groupId>org.apache.tomcat</groupId>
+            <artifactId>tomcat-servlet-api</artifactId>
+            <version>${tomcat.version}</version>
+            <scope>provided</scope>
         </dependency>
 
         <!--JSON-->
@@ -228,12 +220,6 @@
             <artifactId>assertj-core</artifactId>
             <version>3.8.0</version>
             <scope>test</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework.security</groupId>
-            <artifactId>spring-security-test</artifactId>
-            <version>${spring-security.version}</version>
         </dependency>
 
         <dependency>

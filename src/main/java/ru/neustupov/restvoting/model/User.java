@@ -21,6 +21,9 @@ public class User extends AbstractNamedEntity {
     @NotNull
     private Date registered = new Date();
 
+    @Column(name = "enabled", nullable = false, columnDefinition = "bool default true")
+    private boolean enabled = true;
+
     @Enumerated(EnumType.STRING)
     @CollectionTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"))
     @Column(name = "role")
@@ -34,13 +37,22 @@ public class User extends AbstractNamedEntity {
     }
 
     public User(User u) {
-        this(u.getId(), u.getName(), u.getPassword(), u.getRegistered(), u.getRoles());
+        this(u.getId(), u.getName(), u.getPassword(), u.getRegistered(), u.isEnabled(), u.getRoles());
     }
 
-    public User(String name, String password, Date registered, Set<Role> roles) {
+    public User(String name, String password, Date registered, Boolean enabled, Set<Role> roles) {
         this.name = name;
         this.password = password;
         this.registered = registered;
+        this.enabled = enabled;
+        setRoles(roles);
+    }
+
+    public User( Integer id, String name, String password, Date registered, Boolean enabled, Set<Role> roles) {
+        super(id, name);
+        this.password = password;
+        this.registered = registered;
+        this.enabled = enabled;
         setRoles(roles);
     }
 
@@ -48,6 +60,7 @@ public class User extends AbstractNamedEntity {
         super(id, name);
         this.password = password;
         this.registered = registered;
+        this.enabled = true;
         setRoles(roles);
     }
 
@@ -89,5 +102,13 @@ public class User extends AbstractNamedEntity {
 
     public void setRegistered(Date registered) {
         this.registered = registered;
+    }
+
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
     }
 }
