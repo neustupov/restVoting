@@ -11,7 +11,7 @@ import ru.neustupov.restvoting.util.exception.NotFoundException;
 
 import java.util.List;
 
-import static ru.neustupov.votingforrestaurants.util.ValidationUtil.checkNotFoundWithId;
+import static ru.neustupov.restvoting.util.ValidationUtil.checkNotFoundWithId;
 
 @Service
 public class RestaurantServiceImpl implements RestaurantService{

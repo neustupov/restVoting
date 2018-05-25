@@ -17,9 +17,6 @@ public interface UserRepository {
 
     List<User> getAll();
 
-    // null if not found
-    User getByEmail(String email);
-
     default User getWithVotes(int id){
         throw new UnsupportedOperationException();
     }
