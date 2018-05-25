@@ -41,7 +41,7 @@ public class AdminVoteRestControllerTest extends AbstractControllerTest{
     public void testDelete() throws Exception {
         mockMvc.perform(delete(REST_URL + VOTE1_ID))
                 .andDo(print())
-                .andExpect(status().isOk());
+                .andExpect(status().isNoContent());
         assertMatch(voteService.getAll(), VOTES);
     }
 

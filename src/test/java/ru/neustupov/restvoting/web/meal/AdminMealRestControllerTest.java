@@ -39,7 +39,7 @@ public class AdminMealRestControllerTest extends AbstractControllerTest {
         mockMvc.perform(delete(REST_URL + APPLE_ID)
                 .param("menuId", "100007"))
                 .andDo(print())
-                .andExpect(status().isOk());
+                .andExpect(status().isNoContent());
         assertMatch(mealService.getAll(RUSSIA_MENU_ID1), BOTTLE_OF_WATER);
     }
 

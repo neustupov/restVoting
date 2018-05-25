@@ -36,7 +36,7 @@ public class AdminRestaurantRestControllerTest extends AbstractControllerTest{
     public void testDelete() throws Exception {
         mockMvc.perform(delete(REST_URL + RUSSIA_ID))
                 .andDo(print())
-                .andExpect(status().isOk());
+                .andExpect(status().isNoContent());
         assertMatch(restaurantService.getAll(), UKRAINE, U_KOLYANA, ALMAZ, FART);
     }
 
