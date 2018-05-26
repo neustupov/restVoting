@@ -18,6 +18,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static ru.neustupov.restvoting.TestUtil.userHttpBasic;
 import static ru.neustupov.restvoting.UserTestData.*;
 
 public class AdminRestControllerTest extends AbstractControllerTest{
@@ -26,7 +27,8 @@ public class AdminRestControllerTest extends AbstractControllerTest{
 
     @Test
     public void testGet() throws Exception {
-        mockMvc.perform(get(REST_URL + ADMIN_ID))
+        mockMvc.perform(get(REST_URL + ADMIN_ID)
+                .with(userHttpBasic(ADMIN)))
                 .andExpect(status().isOk())
                 .andDo(print())
                 // https://jira.spring.io/browse/SPR-14472
@@ -36,7 +38,8 @@ public class AdminRestControllerTest extends AbstractControllerTest{
 
     @Test
     public void testDelete() throws Exception {
-        mockMvc.perform(delete(REST_URL + USER_ID))
+        mockMvc.perform(delete(REST_URL + USER_ID)
+                .with(userHttpBasic(ADMIN)))
                 .andDo(print())
                 .andExpect(status().isNoContent());
         assertMatch(userService.getAll(), ADMIN);
@@ -48,6 +51,7 @@ public class AdminRestControllerTest extends AbstractControllerTest{
         updated.setName("UpdatedName");
         updated.setRoles(Collections.singletonList(Role.ROLE_ADMIN));
         mockMvc.perform(put(REST_URL + USER_ID)
+                .with(userHttpBasic(ADMIN))
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(JsonUtil.writeValue(updated)))
                 .andExpect(status().isOk());
@@ -57,9 +61,10 @@ public class AdminRestControllerTest extends AbstractControllerTest{
 
     @Test
     public void testCreate() throws Exception {
-        User expected = new User(null, "New", "newUser@yandex.ru", "newPass",
+        User expected = new User(null, "New", "newuser@yandex.ru", "newPass",
                 Date.from(Instant.now()), EnumSet.of(Role.ROLE_USER, Role.ROLE_ADMIN));
         ResultActions action = mockMvc.perform(post(REST_URL)
+                .with(userHttpBasic(ADMIN))
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(JsonUtil.writeValue(expected)))
                 .andExpect(status().isCreated());
@@ -73,7 +78,8 @@ public class AdminRestControllerTest extends AbstractControllerTest{
 
     @Test
     public void testGetAll() throws Exception {
-        TestUtil.print(mockMvc.perform(get(REST_URL))
+        TestUtil.print(mockMvc.perform(get(REST_URL)
+                .with(userHttpBasic(ADMIN)))
                 .andExpect(status().isOk())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
                 .andExpect(contentJson(ADMIN, USER)));
@@ -81,9 +87,39 @@ public class AdminRestControllerTest extends AbstractControllerTest{
 
     @Test
     public void testGetByEmail() throws Exception {
-        mockMvc.perform(get(REST_URL + "by?email=" + USER.getEmail()))
+        mockMvc.perform(get(REST_URL + "by?email=" + ADMIN.getEmail())
+                .with(userHttpBasic(ADMIN)))
                 .andExpect(status().isOk())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
-                .andExpect(contentJson(USER));
+                .andExpect(contentJson(ADMIN));
+    }
+
+    @Test
+    public void testGetUnauth() throws Exception {
+        mockMvc.perform(get(REST_URL))
+                .andExpect(status().isUnauthorized());
+    }
+
+    @Test
+    public void testGetForbidden() throws Exception {
+        mockMvc.perform(get(REST_URL)
+                .with(userHttpBasic(USER)))
+                .andExpect(status().isForbidden());
+    }
+
+    @Test
+    public void testGetNotFound() throws Exception {
+        mockMvc.perform(get(REST_URL + 1)
+                .with(userHttpBasic(ADMIN)))
+                .andExpect(status().isUnprocessableEntity())
+                .andDo(print());
+    }
+
+    @Test
+    public void testDeleteNotFound() throws Exception {
+        mockMvc.perform(delete(REST_URL + 1)
+                .with(userHttpBasic(ADMIN)))
+                .andExpect(status().isUnprocessableEntity())
+                .andDo(print());
     }
 }

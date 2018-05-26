@@ -35,7 +35,7 @@ public class VoteTestData {
 
     public static final Vote VOTE_FOR_GET_BY_USER_ID_AND_DATE = new Vote(VOTE_FOR_GET_BY_USER_ID_AND_DATE_ID, ADMIN, Date.from(Instant.now()), RUSSIA);
 
-    public static final List<Vote> VOTES = Arrays.asList(VOTE2, VOTE3, VOTE4, VOTE5, VOTE6);
+    public static final List<Vote> VOTES = Arrays.asList(VOTE1,VOTE2, VOTE3, VOTE5, VOTE6);
 
     public static Vote getCreated() {
         return new Vote(null, USER, Date.valueOf("2015-05-04"), RUSSIA);

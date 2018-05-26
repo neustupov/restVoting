@@ -15,12 +15,12 @@ public class User extends AbstractNamedEntity {
 
     @Column(name = "email", nullable = false, unique = true)
     @Email
-    @NotBlank
+    @NotNull
     @Size(max = 100)
     private String email;
 
     @Column(name = "password", nullable = false)
-    @NotBlank
+    @NotNull
     @Size(min = 5, max = 64)
     private String password;
 
@@ -35,6 +35,7 @@ public class User extends AbstractNamedEntity {
     @CollectionTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"))
     @Column(name = "role")
     @ElementCollection(fetch = FetchType.EAGER)
+    @NotNull
     private Set<Role> roles;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")

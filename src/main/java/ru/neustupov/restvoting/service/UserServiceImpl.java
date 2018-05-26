@@ -3,9 +3,12 @@ package ru.neustupov.restvoting.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
+import ru.neustupov.restvoting.AuthorizedUser;
 import ru.neustupov.restvoting.model.User;
 import ru.neustupov.restvoting.repository.UserRepository;
 import ru.neustupov.restvoting.util.exception.NotFoundException;
@@ -16,7 +19,7 @@ import static ru.neustupov.restvoting.util.ValidationUtil.checkNotFound;
 import static ru.neustupov.restvoting.util.ValidationUtil.checkNotFoundWithId;
 
 @Service("userService")
-public class UserServiceImpl implements UserService {
+public class UserServiceImpl implements UserService, UserDetailsService {
 
     private final UserRepository repository;
 
@@ -74,5 +77,14 @@ public class UserServiceImpl implements UserService {
     public User getByEmail(String email) throws NotFoundException {
         Assert.notNull(email, "email must not be null");
         return checkNotFound(repository.getByEmail(email), "email=" + email);
+    }
+
+    @Override
+    public AuthorizedUser loadUserByUsername(String email) throws UsernameNotFoundException {
+        User user = repository.getByEmail(email.toLowerCase());
+        if (user == null) {
+            throw new UsernameNotFoundException("User " + email + " is not found");
+        }
+        return new AuthorizedUser(user);
     }
 }
