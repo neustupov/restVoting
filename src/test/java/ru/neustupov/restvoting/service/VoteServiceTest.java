@@ -20,7 +20,7 @@ public class VoteServiceTest extends AbstractServiceTest {
 
     @Test
     public void delete() throws Exception {
-        service.delete(VOTE1_ID, USER_ID);
+        service.delete(VOTE4_ID, USER_ID);
         assertMatch(service.getAll(), VOTES);
     }
 
