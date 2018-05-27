@@ -20,7 +20,7 @@ public class User extends AbstractNamedEntity {
     private String email;
 
     @Column(name = "password", nullable = false)
-    @NotNull
+    @NotBlank
     @Size(min = 5, max = 64)
     private String password;
 
