@@ -11,9 +11,12 @@ public class AuthorizedUser extends org.springframework.security.core.userdetail
 
     private static final long serialVersionUID = 1L;
 
+    private User user;
+
     public AuthorizedUser(User user) {
         super(user.getEmail(), user.getPassword(), user.isEnabled(), true,
                 true, true, user.getRoles());
+        this.user = user;
     }
 
     public static AuthorizedUser safeGet() {
@@ -29,5 +32,9 @@ public class AuthorizedUser extends org.springframework.security.core.userdetail
         AuthorizedUser user = safeGet();
         requireNonNull(user, "No authorized user found");
         return user;
+    }
+
+    public int getId() {
+        return user.getId();
     }
 }

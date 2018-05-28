@@ -3,6 +3,7 @@ package ru.neustupov.restvoting;
 import org.springframework.test.web.servlet.ResultMatcher;
 import ru.neustupov.restvoting.model.Role;
 import ru.neustupov.restvoting.model.User;
+import ru.neustupov.restvoting.web.json.JsonUtil;
 
 import java.time.Instant;
 import java.util.Arrays;
@@ -40,5 +41,9 @@ public class UserTestData {
 
     public static ResultMatcher contentJson(User expected) {
         return content().json(writeIgnoreProps(expected, "registered", "password"));
+    }
+
+    public static String jsonWithPassword(User user, String passw) {
+        return JsonUtil.writeAdditionProps(user, "password", passw);
     }
 }

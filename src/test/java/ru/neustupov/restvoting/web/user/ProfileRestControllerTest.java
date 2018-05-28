@@ -3,6 +3,7 @@ package ru.neustupov.restvoting.web.user;
 import org.junit.Test;
 import org.springframework.http.MediaType;
 import ru.neustupov.restvoting.TestUtil;
+import ru.neustupov.restvoting.UserTestData;
 import ru.neustupov.restvoting.model.Role;
 import ru.neustupov.restvoting.model.User;
 import ru.neustupov.restvoting.web.AbstractControllerTest;
@@ -45,11 +46,11 @@ public class ProfileRestControllerTest extends AbstractControllerTest {
 
     @Test
     public void testUpdate() throws Exception {
-        User updated = new User(USER_ID, "newName", "user@yandex.ru","newPassword", Date.from(Instant.now()), EnumSet.of(Role.ROLE_USER));
+        User updated = new User(USER_ID, "newName", "user@yandex.ru","{noop}newpassword123", Date.from(Instant.now()), EnumSet.of(Role.ROLE_USER));
         mockMvc.perform(put(REST_URL)
                 .with(userHttpBasic(USER))
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(JsonUtil.writeValue(updated)))
+                .content(UserTestData.jsonWithPassword(updated, "newPass")))
                 .andDo(print())
                 .andExpect(status().isOk());
 

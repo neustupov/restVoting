@@ -3,6 +3,7 @@ package ru.neustupov.restvoting.model;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
+import ru.neustupov.restvoting.View;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -19,7 +20,7 @@ public class Meal extends AbstractNamedEntity {
     @JoinColumn(name = "id_menu", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonIgnoreProperties("meals")
-    @NotNull
+    @NotNull(groups = View.Persist.class)
     private Menu menu;
 
     public Meal() {

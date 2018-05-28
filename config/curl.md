@@ -5,16 +5,21 @@
 `curl -s http://localhost:8080/rest/admin/users`
 
 #### get Users 100001
-`curl -s http://localhost:8080/rest/admin/users/100001`
+`curl -s http://localhost:8080/rest/admin/users/100001 --user admin@yandex.ru:admin`
 
 #### create User
-`curl -s -X POST -d '{"name": "New2","password": "passwordNew","roles": ["ROLE_USER"]}' -H 'Content-Type:application/json;charset=UTF-8' http://localhost:8080/rest/admin/users`
+`curl -s -X POST -d '{"name": "New2","password": "passwordNew","roles": ["ROLE_USER"]}' -H 'Content-Type:application/json;charset=UTF-8' http://localhost:8080/rest/admin/users --user admin@yandex.ru:admin`
 
 #### delete User 100000
 `curl -s -X DELETE http://localhost:8080/rest/admin/users/100000`
 
 #### update User 100001
 `curl -s -X PUT -d '{"name": "UserUpdated","password": "passwordNew","roles": ["ROLE_USER"]}' -H 'Content-Type: application/json' http://localhost:8080/rest/admin/users/100001`
+
+#### validate with Error
+`curl -s -X PUT -d '{"name": "","price":""}' -H 'Content-Type: application/json' http://localhost:8080/rest/admin/meals/100014?menuId=100007 --user admin@yandex.ru:admin`
+
+`curl -s -X POST -d '{}' -H 'Content-Type: application/json' http://localhost:8080/rest/admin/users --user admin@yandex.ru:admin`
 
 ### Test ProfileRestController
 

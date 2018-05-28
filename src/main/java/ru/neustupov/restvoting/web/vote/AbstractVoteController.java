@@ -23,13 +23,13 @@ public abstract class AbstractVoteController {
     private VoteService service;
 
     public Vote get(int id) {
-        int userId = AuthorizedUser.id();
+        int userId = AuthorizedUser.get().getId();
         log.info("get vote {} for user {}", id, userId);
         return service.get(id, userId);
     }
 
     public void delete(int id) {
-        int userId = AuthorizedUser.id();
+        int userId = AuthorizedUser.get().getId();
         log.info("delete vote {} for user {}", id, userId);
         service.delete(id, userId);
     }
@@ -45,14 +45,14 @@ public abstract class AbstractVoteController {
     }
 
     public Vote create(Vote vote, int restId) {
-        int userId = AuthorizedUser.id();
+        int userId = AuthorizedUser.get().getId();
         checkNew(vote);
         log.info("create {} for user {}", vote, userId);
         return service.create(vote, userId, restId);
     }
 
     public void update(int id, Vote vote, int restId) {
-        int userId = AuthorizedUser.id();
+        int userId = AuthorizedUser.get().getId();
         vote.setId(id);
         ValidationUtil.checkTimeForVote(STOP_TIME);
         log.info("update {} for user {} and restaurant {}", vote, userId, restId);
@@ -60,13 +60,13 @@ public abstract class AbstractVoteController {
     }
 
     public Vote getByUserIdAndRestId(int restId) {
-        int userId = AuthorizedUser.id();
+        int userId = AuthorizedUser.get().getId();
         log.info("getByUserIdAndRestId userId {} restId {}", restId, userId);
         return service.getByUserIdAndRestId(userId, restId);
     }
 
     public Vote getByUserIdAndDate() {
-        int userId = AuthorizedUser.id();
+        int userId = AuthorizedUser.get().getId();
         return service.getByUserIdAndDate(userId);
     }
 }

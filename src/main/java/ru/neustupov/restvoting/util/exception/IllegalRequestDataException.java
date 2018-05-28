@@ -2,10 +2,9 @@ package ru.neustupov.restvoting.util.exception;
 
 import org.springframework.lang.NonNull;
 
-public class NotFoundException extends RuntimeException {
-
-    public NotFoundException(@NonNull String message) {
-        super(message);
+public class IllegalRequestDataException extends RuntimeException{
+    public IllegalRequestDataException(@NonNull String msg) {
+        super(msg);
     }
 
     @Override
