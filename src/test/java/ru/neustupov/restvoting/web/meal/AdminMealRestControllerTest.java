@@ -7,6 +7,7 @@ import org.springframework.test.web.servlet.ResultActions;
 import ru.neustupov.restvoting.TestUtil;
 import ru.neustupov.restvoting.model.Meal;
 import ru.neustupov.restvoting.service.MealService;
+import ru.neustupov.restvoting.util.exception.ErrorType;
 import ru.neustupov.restvoting.web.AbstractControllerTest;
 import ru.neustupov.restvoting.web.json.JsonUtil;
 
@@ -14,6 +15,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static ru.neustupov.restvoting.MealTestData.*;
 import static ru.neustupov.restvoting.MenuTestData.RUSSIA_MENU_ID1;
@@ -42,6 +44,7 @@ public class AdminMealRestControllerTest extends AbstractControllerTest {
     @Test
     public void testDelete() throws Exception {
         mockMvc.perform(delete(REST_URL + APPLE_ID)
+                .with(userHttpBasic(ADMIN))
                 .param("menuId", "100007"))
                 .andDo(print())
                 .andExpect(status().isNoContent());
@@ -118,6 +121,46 @@ public class AdminMealRestControllerTest extends AbstractControllerTest {
                 .param("menuId", "100007")
                 .with(userHttpBasic(ADMIN)))
                 .andExpect(status().isUnprocessableEntity())
+                .andDo(print());
+    }
+
+    @Test
+    public void testCreateInvalid() throws Exception {
+        Meal invalid = new Meal("Dummy", null);
+        mockMvc.perform(post(REST_URL)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(JsonUtil.writeValue(invalid))
+                .with(userHttpBasic(ADMIN)))
+                .andDo(print())
+                .andExpect(status().isUnprocessableEntity())
+                .andExpect(jsonPath("$.type").value(ErrorType.VALIDATION_ERROR.name()))
+                .andDo(print());
+    }
+
+    @Test
+    public void testUpdateInvalid() throws Exception {
+        Meal invalid = new Meal(APPLE_ID, null, 10);
+        mockMvc.perform(put(REST_URL + APPLE_ID)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(JsonUtil.writeValue(invalid))
+                .with(userHttpBasic(ADMIN)))
+                .andDo(print())
+                .andExpect(status().isUnprocessableEntity())
+                .andExpect(jsonPath("$.type").value(ErrorType.VALIDATION_ERROR.name()))
+                .andDo(print());
+    }
+
+    @Test
+    public void testUpdateHtmlUnsafe() throws Exception {
+        Meal invalid = new Meal(APPLE_ID, "<script>alert(123)</script>", 10 );
+        mockMvc.perform(put(REST_URL + APPLE_ID)
+                .param("menuId", "100007")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(JsonUtil.writeValue(invalid))
+                .with(userHttpBasic(ADMIN)))
+                .andDo(print())
+                .andExpect(status().isUnprocessableEntity())
+                .andExpect(jsonPath("$.type").value(ErrorType.VALIDATION_ERROR.name()))
                 .andDo(print());
     }
 }
