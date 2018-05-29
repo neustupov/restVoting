@@ -21,7 +21,7 @@ public class DataJpaMenuRepositoryImpl implements MenuRepository {
     @Transactional
     @Override
     public Menu save(Menu menu, int restId) {
-        if (!menu.isNew() && get(menu.getId(), restId) == null) {
+        if (!menu.isNew() && get(menu.getId()) == null) {
             return null;
         }
         menu.setRestaurant(crudRestaurantRepository.getOne(restId));
@@ -34,8 +34,8 @@ public class DataJpaMenuRepositoryImpl implements MenuRepository {
     }
 
     @Override
-    public Menu get(int id, int restId) {
-        return crudMenuRepository.findById(id).filter(menu -> menu.getRestaurant().getId() == restId).orElse(null);
+    public Menu get(int id) {
+        return crudMenuRepository.findById(id).orElse(null);
     }
 
     @Override

@@ -9,7 +9,6 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import ru.neustupov.restvoting.View;
 import ru.neustupov.restvoting.model.User;
 
-import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
 

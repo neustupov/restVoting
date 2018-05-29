@@ -9,8 +9,6 @@ import ru.neustupov.restvoting.AuthorizedUser;
 import ru.neustupov.restvoting.View;
 import ru.neustupov.restvoting.model.User;
 
-import javax.validation.Valid;
-
 @RestController
 @RequestMapping(ProfileRestController.REST_URL)
 public class ProfileRestController extends AbstractUserController{
@@ -29,7 +27,8 @@ public class ProfileRestController extends AbstractUserController{
     }
 
     @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public void update(@Validated(View.Web.class) @RequestBody User user, @AuthenticationPrincipal AuthorizedUser authorizedUser) {
+    public void update(@Validated(View.Web.class) @RequestBody User user,
+                       @AuthenticationPrincipal AuthorizedUser authorizedUser) {
         super.update(user, authorizedUser.getId());
     }
 }

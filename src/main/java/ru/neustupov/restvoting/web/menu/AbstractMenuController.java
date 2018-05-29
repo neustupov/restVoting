@@ -17,9 +17,9 @@ public abstract class AbstractMenuController {
     @Autowired
     private MenuService service;
 
-    public Menu get(int id, int restId) {
-        log.info("get menu {} for restaurant {}", id, restId);
-        return service.get(id, restId);
+    public Menu get(int id) {
+        log.info("get menu {}", id);
+        return service.get(id);
     }
 
     public void delete(int id, int restId) {

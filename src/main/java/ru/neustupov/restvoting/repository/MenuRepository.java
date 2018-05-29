@@ -13,7 +13,7 @@ public interface MenuRepository {
     boolean delete(int id, int restId);
 
     // null if not found
-    Menu get(int id, int restId);
+    Menu get(int id);
 
     List<Menu> getAll(int restId);
 
