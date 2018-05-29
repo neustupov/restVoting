@@ -32,8 +32,7 @@ public class AdminMenuRestControllerTest extends AbstractControllerTest{
     @Test
     public void testGet() throws Exception {
         mockMvc.perform(get(REST_URL + RUSSIA_MENU_ID1)
-                .with(userHttpBasic(ADMIN))
-                .param("restId", "100002"))
+                .with(userHttpBasic(ADMIN)))
                 .andExpect(status().isOk())
                 .andDo(print())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
@@ -89,7 +88,7 @@ public class AdminMenuRestControllerTest extends AbstractControllerTest{
                 .content(JsonUtil.writeValue(updated)))
                 .andExpect(status().isOk());
 
-        assertMatch(menuService.get(100007, RUSSIA_ID), updated);
+        assertMatch(menuService.get(100007), updated);
     }
 
     @Test

@@ -14,8 +14,8 @@ public class ProfileMenuRestController extends AbstractMenuController{
 
     @Override
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public Menu get(@PathVariable("id") int id, @RequestParam("restId") int restId) {
-        return super.get(id, restId);
+    public Menu get(@PathVariable("id") int id) {
+        return super.get(id);
     }
 
     @Override

@@ -10,7 +10,6 @@ import ru.neustupov.restvoting.View;
 import ru.neustupov.restvoting.model.Restaurant;
 import ru.neustupov.restvoting.to.RestaurantWithVotes;
 
-import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
 

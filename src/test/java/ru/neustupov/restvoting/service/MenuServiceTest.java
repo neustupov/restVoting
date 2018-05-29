@@ -34,13 +34,13 @@ public class MenuServiceTest extends AbstractServiceTest{
 
     @Test
     public void get() throws Exception {
-        Menu actual = service.get(RUSSIA_MENU_ID1, RUSSIA_ID);
+        Menu actual = service.get(RUSSIA_MENU_ID1);
         assertMatch(actual, RUSSIA_MENU1);
     }
 
     @Test(expected = NotFoundException.class)
     public void getNotFound() throws Exception {
-        service.get(UKRAINE_MENU_ID, RUSSIA_ID);
+        service.get(100);
     }
 
     @Test
