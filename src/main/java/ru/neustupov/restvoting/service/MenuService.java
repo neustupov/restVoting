@@ -3,13 +3,15 @@ package ru.neustupov.restvoting.service;
 import ru.neustupov.restvoting.model.Menu;
 import ru.neustupov.restvoting.util.exception.NotFoundException;
 
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 public interface MenuService {
 
     Menu create(Menu menu, int restId);
 
-    void delete(int id, int restId) throws NotFoundException;
+    void delete(int id) throws NotFoundException;
 
     Menu get(int id) throws NotFoundException;
 
@@ -22,4 +24,6 @@ public interface MenuService {
     Menu getWithRestaurant(int id);
 
     Menu getWitMealsAndRestaurant(int id);
+
+    List<Menu> getBetweenDates(LocalDate startDate, LocalDate endDate, int userId);
 }

@@ -16,13 +16,13 @@ public class MenuServiceTest extends AbstractServiceTest{
 
     @Test
     public void delete() throws Exception {
-        service.delete(RUSSIA_MENU_ID1, RUSSIA_ID);
+        service.delete(RUSSIA_MENU_ID1);
         assertMatch(service.getAll(RUSSIA_ID), RUSSIA_MENU2, MENU_TODAYS_WITH_MEALS);
     }
 
     @Test(expected = NotFoundException.class)
     public void deleteNotFound() throws Exception {
-        service.delete(RUSSIA_MENU_ID1, 1);
+        service.delete(100);
     }
 
     @Test

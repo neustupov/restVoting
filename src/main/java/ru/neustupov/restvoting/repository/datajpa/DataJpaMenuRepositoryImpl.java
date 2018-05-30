@@ -7,6 +7,7 @@ import ru.neustupov.restvoting.model.Menu;
 import ru.neustupov.restvoting.repository.MenuRepository;
 
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 @Repository
@@ -29,8 +30,8 @@ public class DataJpaMenuRepositoryImpl implements MenuRepository {
     }
 
     @Override
-    public boolean delete(int id, int restId) {
-        return crudMenuRepository.delete(id, restId) != 0;
+    public boolean delete(int id) {
+        return crudMenuRepository.delete(id) != 0;
     }
 
     @Override
@@ -49,12 +50,17 @@ public class DataJpaMenuRepositoryImpl implements MenuRepository {
     }
 
     @Override
-    public Menu getTodaysMenuWithMeals(int restId, Date currDate) {
+    public Menu findByRestaurantIdAndAddDate(int restId, Date currDate) {
         return crudMenuRepository.findByRestaurantIdAndAddDate(restId, currDate);
     }
 
     @Override
     public Menu getWithRestaurantAndMeals(int id) {
         return crudMenuRepository.getWithRestaurantAndMeals(id);
+    }
+
+    @Override
+    public List<Menu> getBetween(LocalDate startDate, LocalDate endDate, int userId) {
+        return crudMenuRepository.getBetween(startDate, endDate, userId);
     }
 }

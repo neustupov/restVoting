@@ -3,9 +3,13 @@ package ru.neustupov.restvoting.web.menu;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import ru.neustupov.restvoting.AuthorizedUser;
 import ru.neustupov.restvoting.model.Menu;
 import ru.neustupov.restvoting.service.MenuService;
+import ru.neustupov.restvoting.util.DateTimeUtil;
 
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 import static ru.neustupov.restvoting.util.ValidationUtil.checkNew;
@@ -20,11 +24,6 @@ public abstract class AbstractMenuController {
     public Menu get(int id) {
         log.info("get menu {}", id);
         return service.get(id);
-    }
-
-    public void delete(int id, int restId) {
-        log.info("delete menu {} for restaurant {}", id, restId);
-        service.delete(id, restId);
     }
 
     public List<Menu> getAll(int restId) {
@@ -47,5 +46,20 @@ public abstract class AbstractMenuController {
         menu.setId(id);
         log.info("update {} with id = {} for restaurant {}", menu, id, restId);
         service.update(menu, restId);
+    }
+
+    public void delete(int id) {
+        log.info("delete menu {}", id);
+        service.delete(id);
+    }
+
+    public List<Menu> getBetween(LocalDate startDate, LocalDate endDate, int restId) {
+        log.info("getBetween dates({} - {}) for restaurant {}", startDate, endDate, restId);
+
+        List<Menu> mealsDateFiltered = service.getBetweenDates(
+                startDate != null ? startDate : DateTimeUtil.MIN_DATE,
+                endDate != null ? endDate : DateTimeUtil.MAX_DATE, restId);
+
+        return mealsDateFiltered;
     }
 }

@@ -20,15 +20,15 @@ public class ProfileRestController extends AbstractUserController{
         return super.get(authorizedUser.getId());
     }
 
-    @DeleteMapping
-    @ResponseStatus(value = HttpStatus.NO_CONTENT)
-    public void delete(@AuthenticationPrincipal AuthorizedUser authorizedUser) {
-        super.delete(authorizedUser.getId());
-    }
-
     @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public void update(@Validated(View.Web.class) @RequestBody User user,
                        @AuthenticationPrincipal AuthorizedUser authorizedUser) {
         super.update(user, authorizedUser.getId());
+    }
+
+    @DeleteMapping
+    @ResponseStatus(value = HttpStatus.NO_CONTENT)
+    public void delete(@AuthenticationPrincipal AuthorizedUser authorizedUser) {
+        super.delete(authorizedUser.getId());
     }
 }

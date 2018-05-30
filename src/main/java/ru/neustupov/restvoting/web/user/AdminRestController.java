@@ -19,15 +19,15 @@ public class AdminRestController extends AbstractUserController{
     static final String REST_URL = "/rest/admin/users";
 
     @Override
-    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<User> getAll() {
-        return super.getAll();
-    }
-
-    @Override
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public User get(@PathVariable("id") int id) {
         return super.get(id);
+    }
+
+    @Override
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<User> getAll() {
+        return super.getAll();
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -43,16 +43,16 @@ public class AdminRestController extends AbstractUserController{
     }
 
     @Override
+    @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public void update(@Validated(View.Web.class) @RequestBody User user, @PathVariable("id") int id) {
+        super.update(user, id);
+    }
+
+    @Override
     @DeleteMapping(value = "/{id}")
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
     public void delete(@PathVariable("id") int id) {
         super.delete(id);
-    }
-
-    @Override
-    @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public void update(@Validated(View.Web.class) @RequestBody User user, @PathVariable("id") int id) {
-        super.update(user, id);
     }
 
     @Override
