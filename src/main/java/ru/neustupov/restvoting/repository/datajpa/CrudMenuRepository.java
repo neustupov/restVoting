@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import ru.neustupov.restvoting.model.Menu;
 
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 @Transactional(readOnly = true)
@@ -16,8 +17,8 @@ public interface CrudMenuRepository extends JpaRepository<Menu, Integer> {
 
     @Transactional
     @Modifying
-    @Query("DELETE FROM Menu m WHERE m.id=:id AND m.restaurant.id=:restId")
-    int delete(@Param("id") int id, @Param("restId") int restId);
+    @Query("DELETE FROM Menu m WHERE m.id=:id")
+    int delete(@Param("id") int id);
 
     @Override
     @Transactional
@@ -38,4 +39,9 @@ public interface CrudMenuRepository extends JpaRepository<Menu, Integer> {
     @EntityGraph(attributePaths = {"restaurant", "meals"}, type = EntityGraph.EntityGraphType.LOAD)
     @Query("SELECT m FROM Menu m WHERE m.id=?1")
     Menu getWithRestaurantAndMeals(int id);
+
+    @SuppressWarnings("JpaQlInspection")
+    @Query("SELECT DISTINCT m from Menu m WHERE m.restaurant.id=:restId AND m.addDate BETWEEN :startDate AND :endDate ORDER BY m.addDate DESC")
+    List<Menu> getBetween(@Param("startDate") LocalDate startDate, @Param("endDate") LocalDate endDate, @Param("restId") int restId);
+
 }

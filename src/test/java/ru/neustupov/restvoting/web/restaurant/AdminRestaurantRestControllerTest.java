@@ -39,53 +39,6 @@ public class AdminRestaurantRestControllerTest extends AbstractControllerTest{
     }
 
     @Test
-    public void testDelete() throws Exception {
-        mockMvc.perform(delete(REST_URL + RUSSIA_ID)
-                .with(userHttpBasic(ADMIN)))
-                .andDo(print())
-                .andExpect(status().isNoContent());
-        assertMatch(restaurantService.getAll(), UKRAINE, U_KOLYANA, ALMAZ, FART);
-    }
-
-    @Test
-    public void testUpdate() throws Exception {
-        Restaurant updated = new Restaurant(RUSSIA);
-        updated.setName("UpdatedName");
-        mockMvc.perform(put(REST_URL + RUSSIA_ID)
-                .with(userHttpBasic(ADMIN))
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(JsonUtil.writeValue(updated)))
-                .andExpect(status().isOk());
-
-        assertMatch(restaurantService.get(RUSSIA_ID), updated);
-    }
-
-    @Test
-    public void testCreate() throws Exception {
-        Restaurant expected = new Restaurant(null, "Rostov");
-        ResultActions action = mockMvc.perform(post(REST_URL)
-                .with(userHttpBasic(ADMIN))
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(JsonUtil.writeValue(expected)))
-                .andExpect(status().isCreated());
-
-        Restaurant returned = TestUtil.readFromJson(action, Restaurant.class);
-        expected.setId(returned.getId());
-
-        assertMatch(returned, expected);
-        assertMatch(restaurantService.getAll(), RUSSIA, UKRAINE, U_KOLYANA, ALMAZ, FART, expected);
-    }
-
-    @Test
-    public void testGetAll() throws Exception {
-        TestUtil.print(mockMvc.perform(get(REST_URL)
-                .with(userHttpBasic(ADMIN)))
-                .andExpect(status().isOk())
-                .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
-                .andExpect(contentJson(RUSSIA, UKRAINE, U_KOLYANA, ALMAZ, FART)));
-    }
-
-    @Test
     public void testGetUnauth() throws Exception {
         mockMvc.perform(get(REST_URL))
                 .andExpect(status().isUnauthorized());
@@ -107,11 +60,28 @@ public class AdminRestaurantRestControllerTest extends AbstractControllerTest{
     }
 
     @Test
-    public void testDeleteNotFound() throws Exception {
-        mockMvc.perform(delete(REST_URL + 1)
+    public void testGetAll() throws Exception {
+        TestUtil.print(mockMvc.perform(get(REST_URL)
                 .with(userHttpBasic(ADMIN)))
-                .andExpect(status().isUnprocessableEntity())
-                .andDo(print());
+                .andExpect(status().isOk())
+                .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
+                .andExpect(contentJson(RUSSIA, UKRAINE, U_KOLYANA, ALMAZ, FART)));
+    }
+
+    @Test
+    public void testCreate() throws Exception {
+        Restaurant expected = new Restaurant(null, "Rostov");
+        ResultActions action = mockMvc.perform(post(REST_URL)
+                .with(userHttpBasic(ADMIN))
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(JsonUtil.writeValue(expected)))
+                .andExpect(status().isCreated());
+
+        Restaurant returned = TestUtil.readFromJson(action, Restaurant.class);
+        expected.setId(returned.getId());
+
+        assertMatch(returned, expected);
+        assertMatch(restaurantService.getAll(), RUSSIA, UKRAINE, U_KOLYANA, ALMAZ, FART, expected);
     }
 
     @Test
@@ -125,6 +95,19 @@ public class AdminRestaurantRestControllerTest extends AbstractControllerTest{
                 .andExpect(status().isUnprocessableEntity())
                 .andExpect(jsonPath("$.type").value(ErrorType.VALIDATION_ERROR.name()))
                 .andDo(print());
+    }
+
+    @Test
+    public void testUpdate() throws Exception {
+        Restaurant updated = new Restaurant(RUSSIA);
+        updated.setName("UpdatedName");
+        mockMvc.perform(put(REST_URL + RUSSIA_ID)
+                .with(userHttpBasic(ADMIN))
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(JsonUtil.writeValue(updated)))
+                .andExpect(status().isOk());
+
+        assertMatch(restaurantService.get(RUSSIA_ID), updated);
     }
 
     @Test
@@ -150,6 +133,23 @@ public class AdminRestaurantRestControllerTest extends AbstractControllerTest{
                 .andDo(print())
                 .andExpect(status().isUnprocessableEntity())
                 .andExpect(jsonPath("$.type").value(ErrorType.VALIDATION_ERROR.name()))
+                .andDo(print());
+    }
+
+    @Test
+    public void testDelete() throws Exception {
+        mockMvc.perform(delete(REST_URL + RUSSIA_ID)
+                .with(userHttpBasic(ADMIN)))
+                .andDo(print())
+                .andExpect(status().isNoContent());
+        assertMatch(restaurantService.getAll(), UKRAINE, U_KOLYANA, ALMAZ, FART);
+    }
+
+    @Test
+    public void testDeleteNotFound() throws Exception {
+        mockMvc.perform(delete(REST_URL + 1)
+                .with(userHttpBasic(ADMIN)))
+                .andExpect(status().isUnprocessableEntity())
                 .andDo(print());
     }
 }

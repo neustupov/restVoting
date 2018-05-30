@@ -3,7 +3,9 @@ package ru.neustupov.restvoting.model;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
+import org.springframework.format.annotation.DateTimeFormat;
 import ru.neustupov.restvoting.View;
+import ru.neustupov.restvoting.util.DateTimeUtil;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -15,6 +17,7 @@ import java.util.Set;
 public class Menu extends AbstractBaseEntity {
 
     @Column(name = "add_date", columnDefinition = "date default current_date",  nullable = false)
+    @DateTimeFormat(pattern = DateTimeUtil.DATE_TIME_PATTERN)
     @NotNull
     private Date addDate;
 

@@ -30,8 +30,8 @@ public class MenuServiceImpl implements MenuService {
     }
 
     @Override
-    public void delete(int id, int restId) throws NotFoundException {
-        checkNotFoundWithId(repository.delete(id, restId), id);
+    public void delete(int id) throws NotFoundException {
+        checkNotFoundWithId(repository.delete(id), id);
     }
 
     @Override
@@ -54,7 +54,7 @@ public class MenuServiceImpl implements MenuService {
 
     @Override
     public Menu getTodaysMenuWithMeals(int restId) {
-        return repository.getTodaysMenuWithMeals(restId, Date.valueOf(LocalDate.now()));
+        return repository.findByRestaurantIdAndAddDate(restId, Date.valueOf(LocalDate.now()));
     }
 
     @Override
@@ -65,5 +65,13 @@ public class MenuServiceImpl implements MenuService {
     @Override
     public Menu getWitMealsAndRestaurant(int id) {
         return checkNotFoundWithId(repository.getWithRestaurantAndMeals(id), id);
+    }
+
+    @Override
+    public List<Menu> getBetweenDates(LocalDate startDate, LocalDate endDate, int restId) {
+        Assert.notNull(startDate, "startDate must not be null");
+        Assert.notNull(endDate, "endDate  must not be null");
+        Assert.notNull(restId, "restId  must not be null");
+        return repository.getBetween(startDate, endDate, restId);
     }
 }

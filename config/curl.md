@@ -66,7 +66,7 @@
 `curl -s http://localhost:8080/rest/admin/menus?restId=100002`
 
 #### delete Menu 100007
-`curl -s -X DELETE http://localhost:8080/rest/admin/menus/100007?restId=100002`
+`curl -s -X DELETE http://localhost:8080/rest/admin/menus/100007 --user admin@yandex.ru:admin`
 
 #### get todays Menu with meals for Restaurant 100002
 `curl -s http://localhost:8080/rest/admin/menus/todays?restId=100002`

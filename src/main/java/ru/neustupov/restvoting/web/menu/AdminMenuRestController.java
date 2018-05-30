@@ -11,6 +11,8 @@ import ru.neustupov.restvoting.model.Menu;
 
 import javax.validation.Valid;
 import java.net.URI;
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -26,13 +28,6 @@ public class AdminMenuRestController extends AbstractMenuController {
     }
 
     @Override
-    @DeleteMapping(value = "/{id}")
-    @ResponseStatus(value = HttpStatus.NO_CONTENT)
-    public void delete(@PathVariable("id") int id, @RequestParam("restId") int restId) {
-        super.delete(id, restId);
-    }
-
-    @Override
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public List<Menu> getAll(@RequestParam("restId") int restId) {
         return super.getAll(restId);
@@ -45,7 +40,8 @@ public class AdminMenuRestController extends AbstractMenuController {
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Menu> createWithLocation(@Validated(View.Web.class) @RequestBody Menu menu, @RequestParam("restId") int restId) {
+    public ResponseEntity<Menu> createWithLocation(@Validated(View.Web.class) @RequestBody Menu menu,
+                                                   @RequestParam("restId") int restId) {
         Menu created = super.create(menu, restId);
 
         URI uriOfNewResource = ServletUriComponentsBuilder.fromCurrentContextPath()
@@ -59,5 +55,21 @@ public class AdminMenuRestController extends AbstractMenuController {
     @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
     public void update(@PathVariable("id") int id, @Valid @RequestBody Menu menu, @RequestParam("restId") int restId) {
         super.update(id, menu, restId);
+    }
+
+    @Override
+    @DeleteMapping(value = "/{id}")
+    @ResponseStatus(value = HttpStatus.NO_CONTENT)
+    public void delete(@PathVariable("id") int id) {
+        super.delete(id);
+    }
+
+    @Override
+    @GetMapping(value = "/filter")
+    public List<Menu> getBetween(
+            @RequestParam(value = "startDate", required = false) LocalDate startDate,
+            @RequestParam(value = "endDate", required = false) LocalDate endDate,
+            @RequestParam(value = "restId") int restId) {
+        return super.getBetween(startDate, endDate, restId);
     }
 }
