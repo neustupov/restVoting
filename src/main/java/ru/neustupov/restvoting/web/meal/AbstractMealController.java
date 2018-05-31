@@ -23,14 +23,14 @@ public class AbstractMealController {
         return service.create(meal, menuId);
     }
 
-    public void delete(int id, int menuId){
-        log.info("delete meal {} for menu {}", id, menuId);
-        service.delete(id, menuId);
+    public void delete(int id){
+        log.info("delete meal {}", id);
+        service.delete(id);
     }
 
-    public Meal get(int id, int menuId) {
-        log.info("get meal {} for menu {}", id, menuId);
-        return service.get(id, menuId);
+    public Meal get(int id) {
+        log.info("get meal {}", id);
+        return service.get(id);
     }
 
     public void update(int id, Meal meal, int menuId){

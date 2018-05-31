@@ -33,8 +33,7 @@ public class AdminMealRestControllerTest extends AbstractControllerTest {
     @Test
     public void testGet() throws Exception {
         mockMvc.perform(get(REST_URL + APPLE_ID)
-                .with(userHttpBasic(ADMIN))
-                .param("menuId", "100007"))
+                .with(userHttpBasic(ADMIN)))
                 .andExpect(status().isOk())
                 .andDo(print())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
@@ -42,28 +41,34 @@ public class AdminMealRestControllerTest extends AbstractControllerTest {
     }
 
     @Test
-    public void testDelete() throws Exception {
-        mockMvc.perform(delete(REST_URL + APPLE_ID)
-                .with(userHttpBasic(ADMIN))
-                .param("menuId", "100007"))
-                .andDo(print())
-                .andExpect(status().isNoContent());
-        assertMatch(mealService.getAll(RUSSIA_MENU_ID1), BOTTLE_OF_WATER);
+    public void testGetUnauth() throws Exception {
+        mockMvc.perform(get(REST_URL))
+                .andExpect(status().isUnauthorized());
     }
 
     @Test
-    public void testUpdate() throws Exception {
-        Meal updated = new Meal(APPLE);
-        updated.setName("UpdatedName");
-        mockMvc.perform(put(REST_URL + APPLE_ID)
-                .with(userHttpBasic(ADMIN))
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(JsonUtil.writeValue(updated))
-                .param("mealId", "100014")
-                .param("menuId", "100007"))
-                .andExpect(status().isOk());
+    public void testGetForbidden() throws Exception {
+        mockMvc.perform(get(REST_URL)
+                .with(userHttpBasic(USER)))
+                .andExpect(status().isForbidden());
+    }
 
-        assertMatch(mealService.get(APPLE_ID, RUSSIA_MENU_ID1), updated);
+    @Test
+    public void testGetNotFound() throws Exception {
+        mockMvc.perform(get(REST_URL + 1)
+                .with(userHttpBasic(ADMIN)))
+                .andExpect(status().isUnprocessableEntity())
+                .andDo(print());
+    }
+
+    @Test
+    public void testGetAll() throws Exception {
+        TestUtil.print(mockMvc.perform(get(REST_URL)
+                .with(userHttpBasic(ADMIN))
+                .param("menuId", "100007"))
+                .andExpect(status().isOk())
+                .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
+                .andExpect(contentJson(APPLE, BOTTLE_OF_WATER)));
     }
 
     @Test
@@ -84,47 +89,6 @@ public class AdminMealRestControllerTest extends AbstractControllerTest {
     }
 
     @Test
-    public void testGetAll() throws Exception {
-        TestUtil.print(mockMvc.perform(get(REST_URL)
-                .with(userHttpBasic(ADMIN))
-                .param("menuId", "100007"))
-                .andExpect(status().isOk())
-                .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
-                .andExpect(contentJson(APPLE, BOTTLE_OF_WATER)));
-    }
-
-    @Test
-    public void testGetUnauth() throws Exception {
-        mockMvc.perform(get(REST_URL))
-                .andExpect(status().isUnauthorized());
-    }
-
-    @Test
-    public void testGetForbidden() throws Exception {
-        mockMvc.perform(get(REST_URL)
-                .with(userHttpBasic(USER)))
-                .andExpect(status().isForbidden());
-    }
-
-    @Test
-    public void testGetNotFound() throws Exception {
-        mockMvc.perform(get(REST_URL + 1)
-                .param("menuId", "100007")
-                .with(userHttpBasic(ADMIN)))
-                .andExpect(status().isUnprocessableEntity())
-                .andDo(print());
-    }
-
-    @Test
-    public void testDeleteNotFound() throws Exception {
-        mockMvc.perform(delete(REST_URL + 1)
-                .param("menuId", "100007")
-                .with(userHttpBasic(ADMIN)))
-                .andExpect(status().isUnprocessableEntity())
-                .andDo(print());
-    }
-
-    @Test
     public void testCreateInvalid() throws Exception {
         Meal invalid = new Meal("Dummy", null);
         mockMvc.perform(post(REST_URL)
@@ -135,6 +99,20 @@ public class AdminMealRestControllerTest extends AbstractControllerTest {
                 .andExpect(status().isUnprocessableEntity())
                 .andExpect(jsonPath("$.type").value(ErrorType.VALIDATION_ERROR.name()))
                 .andDo(print());
+    }
+
+    @Test
+    public void testUpdate() throws Exception {
+        Meal updated = new Meal(APPLE);
+        updated.setName("UpdatedName");
+        mockMvc.perform(put(REST_URL + APPLE_ID)
+                .with(userHttpBasic(ADMIN))
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(JsonUtil.writeValue(updated))
+                .param("menuId", "100007"))
+                .andExpect(status().isOk());
+
+        assertMatch(mealService.get(APPLE_ID), updated);
     }
 
     @Test
@@ -161,6 +139,23 @@ public class AdminMealRestControllerTest extends AbstractControllerTest {
                 .andDo(print())
                 .andExpect(status().isUnprocessableEntity())
                 .andExpect(jsonPath("$.type").value(ErrorType.VALIDATION_ERROR.name()))
+                .andDo(print());
+    }
+
+    @Test
+    public void testDelete() throws Exception {
+        mockMvc.perform(delete(REST_URL + APPLE_ID)
+                .with(userHttpBasic(ADMIN)))
+                .andDo(print())
+                .andExpect(status().isNoContent());
+        assertMatch(mealService.getAll(RUSSIA_MENU_ID1), BOTTLE_OF_WATER);
+    }
+
+    @Test
+    public void testDeleteNotFound() throws Exception {
+        mockMvc.perform(delete(REST_URL + 1)
+                .with(userHttpBasic(ADMIN)))
+                .andExpect(status().isUnprocessableEntity())
                 .andDo(print());
     }
 }
