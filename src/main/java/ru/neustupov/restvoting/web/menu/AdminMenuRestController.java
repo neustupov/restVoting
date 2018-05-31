@@ -1,5 +1,6 @@
 package ru.neustupov.restvoting.web.menu;
 
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -11,7 +12,6 @@ import ru.neustupov.restvoting.model.Menu;
 
 import javax.validation.Valid;
 import java.net.URI;
-import java.sql.Date;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -67,8 +67,10 @@ public class AdminMenuRestController extends AbstractMenuController {
     @Override
     @GetMapping(value = "/filter")
     public List<Menu> getBetween(
-            @RequestParam(value = "startDate", required = false) LocalDate startDate,
-            @RequestParam(value = "endDate", required = false) LocalDate endDate,
+            @RequestParam(value = "startDate", required = false)
+            @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate startDate,
+            @RequestParam(value = "endDate", required = false)
+            @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate endDate,
             @RequestParam(value = "restId") int restId) {
         return super.getBetween(startDate, endDate, restId);
     }

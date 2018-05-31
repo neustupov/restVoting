@@ -7,7 +7,6 @@ import ru.neustupov.restvoting.model.Menu;
 import ru.neustupov.restvoting.repository.MenuRepository;
 import ru.neustupov.restvoting.util.exception.NotFoundException;
 
-import java.sql.Date;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -54,7 +53,7 @@ public class MenuServiceImpl implements MenuService {
 
     @Override
     public Menu getTodaysMenuWithMeals(int restId) {
-        return repository.findByRestaurantIdAndAddDate(restId, Date.valueOf(LocalDate.now()));
+        return repository.findByRestaurantIdAndAddDate(restId, LocalDate.now());
     }
 
     @Override

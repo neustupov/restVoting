@@ -8,7 +8,6 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
 import ru.neustupov.restvoting.model.Menu;
 
-import java.sql.Date;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -34,13 +33,14 @@ public interface CrudMenuRepository extends JpaRepository<Menu, Integer> {
 
     @EntityGraph(attributePaths = {"meals"}, type = EntityGraph.EntityGraphType.LOAD)
     @Query("SELECT DISTINCT m FROM Menu m WHERE m.restaurant.id=:restId AND m.addDate=:currDate")
-    Menu findByRestaurantIdAndAddDate(@Param("restId") int restId, @Param("currDate") Date currDate);
+    Menu findByRestaurantIdAndAddDate(@Param("restId") int restId, @Param("currDate") LocalDate currDate);
 
     @EntityGraph(attributePaths = {"restaurant", "meals"}, type = EntityGraph.EntityGraphType.LOAD)
     @Query("SELECT m FROM Menu m WHERE m.id=?1")
     Menu getWithRestaurantAndMeals(int id);
 
     @SuppressWarnings("JpaQlInspection")
+    @EntityGraph(attributePaths = {"meals"}, type = EntityGraph.EntityGraphType.LOAD)
     @Query("SELECT DISTINCT m from Menu m WHERE m.restaurant.id=:restId AND m.addDate BETWEEN :startDate AND :endDate ORDER BY m.addDate DESC")
     List<Menu> getBetween(@Param("startDate") LocalDate startDate, @Param("endDate") LocalDate endDate, @Param("restId") int restId);
 

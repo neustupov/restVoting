@@ -12,7 +12,6 @@ import ru.neustupov.restvoting.web.AbstractControllerTest;
 import ru.neustupov.restvoting.web.json.JsonUtil;
 
 import java.sql.Date;
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 
@@ -125,7 +124,7 @@ public class AdminMenuRestControllerTest extends AbstractControllerTest {
     public void testUpdate() throws Exception {
         Menu updated = new Menu(getCreated());
         updated.setId(100007);
-        updated.setAddDate(Date.valueOf("2017-06-01"));
+        updated.setAddDate(LocalDate.of(2017, 6, 1));
         mockMvc.perform(put(REST_URL + RUSSIA_MENU_ID1)
                 .with(userHttpBasic(ADMIN))
                 .param("restId", "100002")
@@ -167,7 +166,7 @@ public class AdminMenuRestControllerTest extends AbstractControllerTest {
                 .andDo(print());
     }
 
-    /*@Test
+    @Test
     public void testBetween() throws Exception {
         mockMvc.perform(get(REST_URL + "/filter")
                 .param("startDate", "2015-05-01")
@@ -176,6 +175,6 @@ public class AdminMenuRestControllerTest extends AbstractControllerTest {
                 .with(userHttpBasic(ADMIN)))
                 .andExpect(status().isOk())
                 .andDo(print())
-                .andExpect(contentJsonArray(RUSSIA_MENU1,FART_MENU));
-    }*/
+                .andExpect(contentJsonArray(RUSSIA_MENU1,RUSSIA_MENU2));
+    }
 }
