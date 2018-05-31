@@ -2,7 +2,6 @@ package ru.neustupov.restvoting.repository;
 
 import ru.neustupov.restvoting.model.Menu;
 
-import java.sql.Date;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -22,7 +21,7 @@ public interface MenuRepository {
         throw new UnsupportedOperationException();
     }
 
-    default Menu findByRestaurantIdAndAddDate(int id, Date currDate) { throw new UnsupportedOperationException();}
+    default Menu findByRestaurantIdAndAddDate(int id, LocalDate currDate) { throw new UnsupportedOperationException();}
 
     default Menu getWithRestaurantAndMeals(int id) {
         throw new UnsupportedOperationException();

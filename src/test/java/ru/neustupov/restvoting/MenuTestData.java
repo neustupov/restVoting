@@ -3,7 +3,6 @@ package ru.neustupov.restvoting;
 import org.springframework.test.web.servlet.ResultMatcher;
 import ru.neustupov.restvoting.model.Menu;
 
-import java.sql.Date;
 import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
@@ -23,19 +22,19 @@ public class MenuTestData {
     public static final int RUSSIA_MENU_ID2 = START_SEQ + 12;
     public static final int MENU_TODAYS_WITH_MEALS_ID = START_SEQ + 13;
 
-    public static final Menu RUSSIA_MENU1 = new Menu(RUSSIA_MENU_ID1, Date.valueOf("2015-05-01"));
-    public static final Menu UKRAINE_MENU = new Menu(UKRAINE_MENU_ID, Date.valueOf("2015-05-02"));
-    public static final Menu U_KOLYANA_MENU = new Menu(U_KOLYANA_MENU_ID, Date.valueOf("2015-05-03"));
-    public static final Menu ALMAZ_MENU = new Menu(ALMAZ_MENU_ID, Date.valueOf("2015-05-01"));
-    public static final Menu FART_MENU = new Menu(FART_MENU_ID, Date.valueOf("2015-05-02"));
-    public static final Menu RUSSIA_MENU2 = new Menu(RUSSIA_MENU_ID2, Date.valueOf("2015-05-02"));
+    public static final Menu RUSSIA_MENU1 = new Menu(RUSSIA_MENU_ID1, LocalDate.of(2015, 5, 1));
+    public static final Menu UKRAINE_MENU = new Menu(UKRAINE_MENU_ID, LocalDate.of(2015, 5, 2));
+    public static final Menu U_KOLYANA_MENU = new Menu(U_KOLYANA_MENU_ID, LocalDate.of(2015, 5, 3));
+    public static final Menu ALMAZ_MENU = new Menu(ALMAZ_MENU_ID, LocalDate.of(2015, 5, 1));
+    public static final Menu FART_MENU = new Menu(FART_MENU_ID, LocalDate.of(2015, 5, 2));
+    public static final Menu RUSSIA_MENU2 = new Menu(RUSSIA_MENU_ID2, LocalDate.of(2015, 5, 2));
 
-    public static final Menu MENU_TODAYS_WITH_MEALS = new Menu(MENU_TODAYS_WITH_MEALS_ID, Date.valueOf(LocalDate.now()));
+    public static final Menu MENU_TODAYS_WITH_MEALS = new Menu(MENU_TODAYS_WITH_MEALS_ID, LocalDate.now());
 
     public static final List<Menu> MENUS = Arrays.asList(RUSSIA_MENU1, UKRAINE_MENU, U_KOLYANA_MENU, ALMAZ_MENU, FART_MENU, RUSSIA_MENU2);
 
     public static Menu getCreated() {
-        return new Menu(null, Date.valueOf("2015-06-01"));
+        return new Menu(null, LocalDate.of(2015, 6, 1));
     }
 
     public static void assertMatch(Menu actual, Menu expected) {
