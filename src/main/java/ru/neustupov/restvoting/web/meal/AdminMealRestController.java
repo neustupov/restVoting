@@ -9,7 +9,6 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import ru.neustupov.restvoting.View;
 import ru.neustupov.restvoting.model.Meal;
 
-import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
 
@@ -21,8 +20,8 @@ public class AdminMealRestController extends AbstractMealController{
 
     @Override
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public Meal get(@PathVariable("id") int id, @RequestParam("menuId") int menuId) {
-        return super.get(id, menuId);
+    public Meal get(@PathVariable("id") int id) {
+        return super.get(id);
     }
 
     @Override
@@ -51,7 +50,7 @@ public class AdminMealRestController extends AbstractMealController{
     @Override
     @DeleteMapping(value = "/{id}")
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
-    public void delete(@PathVariable("id") int id, @RequestParam("menuId") int menuId) {
-        super.delete(id, menuId);
+    public void delete(@PathVariable("id") int id) {
+        super.delete(id);
     }
 }

@@ -13,18 +13,6 @@ public class ProfileMenuRestController extends AbstractMenuController{
     static final String REST_URL = "/rest/profile/menus";
 
     @Override
-    @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public Menu get(@PathVariable("id") int id) {
-        return super.get(id);
-    }
-
-    @Override
-    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<Menu> getAll(int restId) {
-        return super.getAll(restId);
-    }
-
-    @Override
     @GetMapping(value = "/todays", produces = MediaType.APPLICATION_JSON_VALUE)
     public Menu getTodaysMenuWithMeals(@RequestParam("restId") int restId) {
         return super.getTodaysMenuWithMeals(restId);

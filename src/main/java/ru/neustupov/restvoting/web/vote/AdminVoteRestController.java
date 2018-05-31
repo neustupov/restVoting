@@ -26,13 +26,6 @@ public class AdminVoteRestController extends AbstractVoteController{
     }
 
     @Override
-    @DeleteMapping(value = "/{id}")
-    @ResponseStatus(value = HttpStatus.NO_CONTENT)
-    public void delete(@PathVariable("id") int id) {
-        super.delete(id);
-    }
-
-    @Override
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public List<Vote> getAll() {
         return super.getAll();
@@ -53,5 +46,12 @@ public class AdminVoteRestController extends AbstractVoteController{
     @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
     public void update(@PathVariable("id") int id, @Validated(View.Web.class) @RequestBody  Vote vote, @RequestParam("restId") int restId) {
         super.update(id, vote, restId);
+    }
+
+    @Override
+    @DeleteMapping(value = "/{id}")
+    @ResponseStatus(value = HttpStatus.NO_CONTENT)
+    public void delete(@PathVariable("id") int id) {
+        super.delete(id);
     }
 }

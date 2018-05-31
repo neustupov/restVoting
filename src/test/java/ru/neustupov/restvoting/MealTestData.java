@@ -28,6 +28,8 @@ public class MealTestData {
     public static final Meal BREAD = new Meal(BREAD_ID, "Bread", 40);
     public static final Meal BOTTLE_OF_WATER = new Meal(BOTTLE_OF_WATER_ID, "Bottle of water", 50);
 
+    public static final Meal NOT_FOUND_MEAL = new Meal(100500, "Popcorn", 999);
+
     public static final Meal MEAL_IN_MENU = new Meal(MEAL_IN_MENU_ID, "Mango", 100);
 
     public static final List<Meal> MEALS = Arrays.asList(APPLE, JUICE, POTATO, BANANAS, BREAD, BOTTLE_OF_WATER);

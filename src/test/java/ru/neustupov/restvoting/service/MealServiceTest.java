@@ -18,13 +18,13 @@ public class MealServiceTest extends AbstractServiceTest{
 
     @Test
     public void delete() throws Exception {
-        service.delete(APPLE_ID, RUSSIA_MENU_ID1);
+        service.delete(APPLE_ID);
         assertMatch(service.getAll(RUSSIA_MENU_ID1), BOTTLE_OF_WATER);
     }
 
     @Test(expected = NotFoundException.class)
     public void deleteNotFound() throws Exception {
-        service.delete(APPLE_ID, 1);
+        service.delete(100500);
     }
 
     @Test
@@ -36,13 +36,13 @@ public class MealServiceTest extends AbstractServiceTest{
 
     @Test
     public void get() throws Exception {
-        Meal actual = service.get(APPLE_ID, RUSSIA_MENU_ID1);
+        Meal actual = service.get(APPLE_ID);
         assertMatch(actual, APPLE);
     }
 
     @Test(expected = NotFoundException.class)
     public void getNotFound() throws Exception {
-        service.get(BANANAS_ID, RUSSIA_MENU_ID1);
+        service.get(100500);
     }
 
     @Test
@@ -54,12 +54,12 @@ public class MealServiceTest extends AbstractServiceTest{
     public void update() throws Exception {
         Meal updated = getUpdated();
         service.update(updated, RUSSIA_MENU_ID1);
-        assertMatch(service.get(APPLE_ID, RUSSIA_MENU_ID1), updated);
+        assertMatch(service.get(APPLE_ID), updated);
     }
 
     @Test(expected = NotFoundException.class)
     public void updateNotFound() throws Exception {
-        service.update(BANANAS, RUSSIA_MENU_ID1);
+        service.update(NOT_FOUND_MEAL, RUSSIA_MENU_ID1);
     }
 
     @Test

@@ -9,9 +9,9 @@ public interface MealService {
 
     Meal create(Meal meal, int menuId);
 
-    void delete(int id, int menuId) throws NotFoundException;
+    void delete(int id) throws NotFoundException;
 
-    Meal get(int id, int menuId) throws NotFoundException;
+    Meal get(int id) throws NotFoundException;
 
     void update(Meal meal, int menuId);
 

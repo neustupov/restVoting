@@ -14,8 +14,8 @@ public class ProfileMealRestController extends AbstractMealController{
 
     @Override
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public Meal get(@PathVariable("id") int id, @RequestParam("menuId") int menuId) {
-        return super.get(id, menuId);
+    public Meal get(@PathVariable("id") int id) {
+        return super.get(id);
     }
 
     @Override
