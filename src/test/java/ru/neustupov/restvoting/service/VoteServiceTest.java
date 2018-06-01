@@ -33,7 +33,8 @@ public class VoteServiceTest extends AbstractServiceTest {
     public void create() throws Exception {
         Vote created = getCreated();
         service.create(created, USER_ID, RUSSIA_ID);
-        assertMatch(service.getAll(), VOTE1, VOTE2, VOTE3, VOTE4, VOTE5, VOTE6, created);
+        assertMatch(service.getAll(), VOTE1, VOTE2, VOTE3, VOTE4, VOTE5, VOTE6,
+                VOTE_FOR_GET_BY_USER_ID_AND_DATE, created);
     }
 
     @Test
@@ -49,17 +50,16 @@ public class VoteServiceTest extends AbstractServiceTest {
 
     @Test
     public void getAll() throws Exception {
-        assertMatch(service.getAll(), VOTE1, VOTE2, VOTE3, VOTE4, VOTE5, VOTE6);
+        assertMatch(service.getAll(), VOTE1, VOTE2, VOTE3, VOTE4, VOTE5, VOTE6, VOTE_FOR_GET_BY_USER_ID_AND_DATE);
     }
 
     @Test
     public void getByUserIdAndDate() throws Exception {
-        service.create(new Vote(Date.from(Instant.now())), ADMIN_ID, RUSSIA_ID);
         assertMatch(service.getByUserIdAndDate(ADMIN_ID), VOTE_FOR_GET_BY_USER_ID_AND_DATE);
     }
 
     @Test
     public void getByUserIdAndDateNotFound() throws Exception {
-        assertMatch(service.getByUserIdAndDate(ADMIN_ID), null);
+        assertMatch(service.getByUserIdAndDate(USER_ID), null);
     }
 }

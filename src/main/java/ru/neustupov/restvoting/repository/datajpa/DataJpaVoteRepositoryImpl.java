@@ -6,6 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 import ru.neustupov.restvoting.model.Vote;
 import ru.neustupov.restvoting.repository.VoteRepository;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Repository
@@ -81,7 +82,16 @@ public class DataJpaVoteRepositoryImpl implements VoteRepository {
         return crudVoteRepository.getByUserIdAndDate(userId);
     }
 
-    public List<Vote> getAllForCurrentDate() {
-        return crudVoteRepository.getAllForCurrentDate();
+    public List<Vote> getTodaysVotes() {
+        return crudVoteRepository.getTodaysVotes();
+    }
+
+    public List<Vote> getTodaysVotesOfAuthUserAndRest(int userId, int restId) {
+        return crudVoteRepository.getTodaysVotesOfAuthUserAndRest(userId, restId);
+    }
+
+    @Override
+    public List<Vote> getBetween(LocalDate startDate, LocalDate endDate, int userId) {
+        return crudVoteRepository.getBetween(startDate, endDate, userId);
     }
 }

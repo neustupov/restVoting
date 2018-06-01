@@ -8,7 +8,6 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import ru.neustupov.restvoting.View;
 import ru.neustupov.restvoting.model.Vote;
 
-import javax.validation.Valid;
 import java.net.URI;
 
 @RestController
@@ -26,5 +25,12 @@ public class ProfileVoteRestController extends AbstractVoteController{
                 .buildAndExpand(created.getId()).toUri();
 
         return ResponseEntity.created(uriOfNewResource).body(created);
+    }
+
+    @Override
+    @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public void update(@PathVariable("id") int id, @Validated(View.Web.class) @RequestBody Vote vote,
+                       @RequestParam("restId") int restId) {
+        super.update(id, vote, restId);
     }
 }

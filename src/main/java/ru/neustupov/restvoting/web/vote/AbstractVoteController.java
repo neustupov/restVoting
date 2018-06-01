@@ -6,8 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import ru.neustupov.restvoting.AuthorizedUser;
 import ru.neustupov.restvoting.model.Vote;
 import ru.neustupov.restvoting.service.VoteService;
+import ru.neustupov.restvoting.util.DateTimeUtil;
 import ru.neustupov.restvoting.util.ValidationUtil;
 
+import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
 
@@ -17,7 +19,7 @@ public abstract class AbstractVoteController {
 
     private static final Logger log = LoggerFactory.getLogger(AbstractVoteController.class);
 
-    static final LocalTime STOP_TIME = LocalTime.of(11,00,00,00);
+    static final LocalTime STOP_TIME = LocalTime.of(11, 00, 00, 00);
 
     @Autowired
     private VoteService service;
@@ -39,7 +41,7 @@ public abstract class AbstractVoteController {
         return service.getAll();
     }
 
-    public List<Vote> getAllByRest(int restId){
+    public List<Vote> getAllByRest(int restId) {
         log.info("getAllByRest {}", restId);
         return service.getAllByRest(restId);
     }
@@ -68,5 +70,23 @@ public abstract class AbstractVoteController {
     public Vote getByUserIdAndDate() {
         int userId = AuthorizedUser.get().getId();
         return service.getByUserIdAndDate(userId);
+    }
+
+    public List<Vote> getTodaysVotes() {
+        return service.getTodaysVotes();
+    }
+
+    public List<Vote> getTodaysVotesOfAuthUserAndRest(int restId){
+        return service.getTodaysVotesOfAuthUserAndRest(restId);
+    }
+
+    public List<Vote> getBetween(LocalDate startDate, LocalDate endDate, int restId) {
+        log.info("getBetween dates({} - {}) for restaurant {}", startDate, endDate, restId);
+
+        List<Vote> mealsDateFiltered = service.getBetween(
+                startDate != null ? startDate : DateTimeUtil.MIN_DATE,
+                endDate != null ? endDate : DateTimeUtil.MAX_DATE, restId);
+
+        return mealsDateFiltered;
     }
 }

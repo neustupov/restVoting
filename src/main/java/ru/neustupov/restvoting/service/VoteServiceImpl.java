@@ -3,16 +3,22 @@ package ru.neustupov.restvoting.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
+import ru.neustupov.restvoting.AuthorizedUser;
 import ru.neustupov.restvoting.model.Vote;
 import ru.neustupov.restvoting.repository.VoteRepository;
 import ru.neustupov.restvoting.util.exception.NotFoundException;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 
 import static ru.neustupov.restvoting.util.ValidationUtil.checkNotFoundWithId;
+import static ru.neustupov.restvoting.util.ValidationUtil.checkTimeForVote;
 
 @Service
 public class VoteServiceImpl implements VoteService{
+
+    final LocalTime STOP_TIME = LocalTime.of(11, 0);
 
     private final VoteRepository repository;
 
@@ -40,7 +46,8 @@ public class VoteServiceImpl implements VoteService{
     @Override
     public void update(Vote vote, int userId, int restId) {
         Assert.notNull(vote, "vote must not be null");
-        checkNotFoundWithId(repository.save(vote, userId,restId), vote.getId());
+        checkTimeForVote(STOP_TIME);
+        checkNotFoundWithId(repository.save(vote, userId, restId), vote.getId());
     }
 
     @Override
@@ -87,7 +94,21 @@ public class VoteServiceImpl implements VoteService{
         return repository.getByUserIdAndDate(userId);
     }
 
-    public List<Vote> getAllForCurrentDate(){
-        return repository.getAllForCurrentDate();
+    public List<Vote> getTodaysVotes(){
+        return repository.getTodaysVotes();
+    }
+
+    public List<Vote> getTodaysVotesOfAuthUserAndRest(int restId) {
+        int userId = AuthorizedUser.get().getId();
+        Assert.notNull(userId, "userId must not be null");
+        Assert.notNull(restId, "restId must not be null");
+        return repository.getTodaysVotesOfAuthUserAndRest(userId, restId);
+    }
+
+    public List<Vote> getBetween(LocalDate startDate, LocalDate endDate, int restId){
+        Assert.notNull(startDate, "startDate must not be null");
+        Assert.notNull(endDate, "endDate  must not be null");
+        Assert.notNull(restId, "restId  must not be null");
+        return repository.getBetween(startDate, endDate, restId);
     }
 }
