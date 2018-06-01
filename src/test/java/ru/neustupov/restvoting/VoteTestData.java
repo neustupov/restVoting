@@ -5,6 +5,7 @@ import ru.neustupov.restvoting.model.Vote;
 
 import java.sql.Date;
 import java.time.Instant;
+import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
 
@@ -33,9 +34,11 @@ public class VoteTestData {
     public static final Vote VOTE5 = new Vote(VOTE5_ID, ADMIN, Date.valueOf("2015-05-02"), FART);
     public static final Vote VOTE6 = new Vote(VOTE6_ID, ADMIN, Date.valueOf("2015-05-03"), RUSSIA);
 
+    public static final Vote TODAYS_VOTE = new Vote(100027, ADMIN, Date.valueOf(LocalDate.now()), RUSSIA);
+
     public static final Vote VOTE_FOR_GET_BY_USER_ID_AND_DATE = new Vote(VOTE_FOR_GET_BY_USER_ID_AND_DATE_ID, ADMIN, Date.from(Instant.now()), RUSSIA);
 
-    public static final List<Vote> VOTES = Arrays.asList(VOTE1,VOTE2, VOTE3, VOTE5, VOTE6);
+    public static final List<Vote> VOTES = Arrays.asList(VOTE1,VOTE2, VOTE3, VOTE5, VOTE6, VOTE_FOR_GET_BY_USER_ID_AND_DATE);
 
     public static Vote getCreated() {
         return new Vote(null, USER, Date.valueOf("2015-05-04"), RUSSIA);

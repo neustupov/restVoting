@@ -43,5 +43,4 @@ public interface CrudMenuRepository extends JpaRepository<Menu, Integer> {
     @EntityGraph(attributePaths = {"meals"}, type = EntityGraph.EntityGraphType.LOAD)
     @Query("SELECT DISTINCT m from Menu m WHERE m.restaurant.id=:restId AND m.addDate BETWEEN :startDate AND :endDate ORDER BY m.addDate DESC")
     List<Menu> getBetween(@Param("startDate") LocalDate startDate, @Param("endDate") LocalDate endDate, @Param("restId") int restId);
-
 }

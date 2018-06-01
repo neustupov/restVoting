@@ -3,6 +3,7 @@ package ru.neustupov.restvoting.service;
 import ru.neustupov.restvoting.model.Vote;
 import ru.neustupov.restvoting.util.exception.NotFoundException;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public interface VoteService {
@@ -31,5 +32,9 @@ public interface VoteService {
 
     Vote getByUserIdAndDate(int userId);
 
-    List<Vote> getAllForCurrentDate();
+    List<Vote> getTodaysVotes();
+
+    List<Vote> getTodaysVotesOfAuthUserAndRest(int restId);
+
+    List<Vote> getBetween(LocalDate startDate, LocalDate endDate, int restId);
 }
