@@ -12,8 +12,7 @@ public interface VoteRepository {
     // false if not found
     boolean delete(int id, int userId);
 
-    // null if not found
-    Vote get(int id, int userId);
+    Vote get(int id);
 
     List<Vote> getAll();
 
@@ -29,7 +28,7 @@ public interface VoteRepository {
         throw new UnsupportedOperationException();
     }
 
-    default Vote getWithRestaurantAndUser(int id, int restId, int userId){throw new UnsupportedOperationException();}
+    default Vote getWithRestaurantAndUser(int id){throw new UnsupportedOperationException();}
 
     Vote getByUserIdAndRestId(int userId, int restId);
 

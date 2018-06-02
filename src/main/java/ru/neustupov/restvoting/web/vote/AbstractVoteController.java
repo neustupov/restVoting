@@ -25,9 +25,8 @@ public abstract class AbstractVoteController {
     private VoteService service;
 
     public Vote get(int id) {
-        int userId = AuthorizedUser.get().getId();
-        log.info("get vote {} for user {}", id, userId);
-        return service.get(id, userId);
+        log.info("get vote {}", id);
+        return service.get(id);
     }
 
     public void delete(int id) {

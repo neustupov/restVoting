@@ -12,7 +12,7 @@ public interface VoteService {
 
     void delete(int id, int userId) throws NotFoundException;
 
-    Vote get(int id, int userId) throws NotFoundException;
+    Vote get(int id) throws NotFoundException;
 
     void update(Vote vote, int userId, int restId);
 
@@ -26,7 +26,7 @@ public interface VoteService {
 
     Vote getWithRestaurant(int id, int restId);
 
-    Vote getWithRestaurantAndUser(int id, int restId, int userId);
+    Vote getWithRestaurantAndUser(int id);
 
     Vote getByUserIdAndRestId(int userId, int restId);
 

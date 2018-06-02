@@ -39,13 +39,13 @@ public class VoteServiceTest extends AbstractServiceTest {
 
     @Test
     public void get() throws Exception {
-        Vote actual = service.get(VOTE1_ID, USER_ID);
+        Vote actual = service.get(VOTE1_ID);
         assertMatch(actual, VOTE1);
     }
 
     @Test(expected = NotFoundException.class)
     public void getNotFound() throws Exception {
-        service.get(VOTE1_ID, ADMIN_ID);
+        service.get(100500);
     }
 
     @Test

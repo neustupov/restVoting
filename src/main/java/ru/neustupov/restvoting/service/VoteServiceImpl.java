@@ -39,8 +39,8 @@ public class VoteServiceImpl implements VoteService{
     }
 
     @Override
-    public Vote get(int id, int userId) throws NotFoundException {
-        return checkNotFoundWithId(repository.get(id, userId), id);
+    public Vote get(int id) throws NotFoundException {
+        return checkNotFoundWithId(repository.get(id), id);
     }
 
     @Override
@@ -79,8 +79,8 @@ public class VoteServiceImpl implements VoteService{
     }
 
     @Override
-    public Vote getWithRestaurantAndUser(int id, int restId, int userId) {
-        return checkNotFoundWithId(repository.getWithRestaurantAndUser(id, restId, userId), id);
+    public Vote getWithRestaurantAndUser(int id) {
+        return checkNotFoundWithId(repository.getWithRestaurantAndUser(id), id);
     }
 
     public Vote getByUserIdAndRestId(int userId, int restId) {

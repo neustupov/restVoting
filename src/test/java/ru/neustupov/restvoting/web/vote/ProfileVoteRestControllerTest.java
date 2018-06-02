@@ -78,7 +78,7 @@ public class ProfileVoteRestControllerTest extends AbstractControllerTest{
                 .param("restId", "100002"))
                 .andExpect(status().isOk());
 
-        assertMatch(voteService.get(VOTE1_ID, USER_ID), updated);
+        assertMatch(voteService.get(VOTE1_ID), updated);
     }
 
     @Test
