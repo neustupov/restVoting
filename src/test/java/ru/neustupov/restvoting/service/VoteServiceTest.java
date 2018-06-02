@@ -5,9 +5,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import ru.neustupov.restvoting.model.Vote;
 import ru.neustupov.restvoting.util.exception.NotFoundException;
 
-import java.sql.Date;
-import java.time.Instant;
-
 import static ru.neustupov.restvoting.RestaurantTestData.RUSSIA_ID;
 import static ru.neustupov.restvoting.UserTestData.ADMIN_ID;
 import static ru.neustupov.restvoting.UserTestData.USER_ID;

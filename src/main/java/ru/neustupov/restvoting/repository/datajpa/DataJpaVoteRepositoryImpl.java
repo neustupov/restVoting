@@ -48,28 +48,8 @@ public class DataJpaVoteRepositoryImpl implements VoteRepository {
     }
 
     @Override
-    public List<Vote> getAllByUser(int userId) {
-        return crudVoteRepository.getAllByUserId(userId);
-    }
-
-    @Override
     public List<Vote> getAllByRest(int restId) {
         return crudVoteRepository.getAllByRestaurantId(restId);
-    }
-
-    @Override
-    public Vote getWithRestaurant(int id, int restId) {
-        return crudVoteRepository.getWithRestaurant(id, restId);
-    }
-
-    @Override
-    public Vote getWithUser(int id, int userId) {
-        return crudVoteRepository.getWithUser(id, userId);
-    }
-
-    @Override
-    public Vote getWithRestaurantAndUser(int id) {
-        return crudVoteRepository.getWithRestaurantAndUser(id);
     }
 
     @Override

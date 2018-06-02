@@ -1,9 +1,7 @@
 package ru.neustupov.restvoting.web.menu;
 
 import org.junit.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import ru.neustupov.restvoting.service.MenuService;
 import ru.neustupov.restvoting.web.AbstractControllerTest;
 
 import java.sql.Date;

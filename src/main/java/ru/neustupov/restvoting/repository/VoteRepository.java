@@ -16,19 +16,7 @@ public interface VoteRepository {
 
     List<Vote> getAll();
 
-    List<Vote> getAllByUser(int userId);
-
     List<Vote> getAllByRest(int restId);
-
-    default Vote getWithRestaurant(int id, int restId){
-        throw new UnsupportedOperationException();
-    }
-
-    default Vote getWithUser(int id, int userId){
-        throw new UnsupportedOperationException();
-    }
-
-    default Vote getWithRestaurantAndUser(int id){throw new UnsupportedOperationException();}
 
     Vote getByUserIdAndRestId(int userId, int restId);
 

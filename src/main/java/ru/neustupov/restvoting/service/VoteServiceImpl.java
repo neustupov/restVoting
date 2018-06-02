@@ -56,31 +56,9 @@ public class VoteServiceImpl implements VoteService{
     }
 
     @Override
-    public List<Vote> getAllByUser(int userId) {
-        Assert.notNull(userId, "userId must not be null");
-        return repository.getAllByUser(userId);
-    }
-
-    @Override
     public List<Vote> getAllByRest(int restId) {
         Assert.notNull(restId, "restId must not be null");
         return repository.getAllByRest(restId);
-    }
-
-    @Override
-    public Vote getWithUser(int id, int userId) {
-        return checkNotFoundWithId(
-                repository.getWithUser(id, userId), id);
-    }
-
-    @Override
-    public Vote getWithRestaurant(int id, int restId) {
-        return checkNotFoundWithId(repository.getWithRestaurant(id, restId), id);
-    }
-
-    @Override
-    public Vote getWithRestaurantAndUser(int id) {
-        return checkNotFoundWithId(repository.getWithRestaurantAndUser(id), id);
     }
 
     public Vote getByUserIdAndRestId(int userId, int restId) {

@@ -6,8 +6,6 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.CacheManager;
 import org.springframework.dao.DataAccessException;
-import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.transaction.TransactionSystemException;
 import ru.neustupov.restvoting.model.Role;
 import ru.neustupov.restvoting.model.User;
 import ru.neustupov.restvoting.util.exception.NotFoundException;

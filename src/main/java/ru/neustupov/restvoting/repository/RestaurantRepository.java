@@ -19,12 +19,4 @@ public interface RestaurantRepository {
     default Restaurant getWithVotes(int id){
         throw new UnsupportedOperationException();
     }
-
-    default Restaurant getWithMenus(int id){
-        throw new UnsupportedOperationException();
-    }
-
-    default Restaurant getWithVotesAndMenus(int id){
-        throw new UnsupportedOperationException();
-    }
 }

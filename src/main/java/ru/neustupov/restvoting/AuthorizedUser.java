@@ -2,7 +2,6 @@ package ru.neustupov.restvoting;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import ru.neustupov.restvoting.model.AbstractBaseEntity;
 import ru.neustupov.restvoting.model.User;
 
 import static java.util.Objects.requireNonNull;

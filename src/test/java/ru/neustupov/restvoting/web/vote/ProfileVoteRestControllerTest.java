@@ -21,9 +21,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static ru.neustupov.restvoting.RestaurantTestData.RUSSIA;
 import static ru.neustupov.restvoting.TestUtil.userHttpBasic;
-import static ru.neustupov.restvoting.UserTestData.ADMIN;
 import static ru.neustupov.restvoting.UserTestData.USER;
-import static ru.neustupov.restvoting.UserTestData.USER_ID;
 import static ru.neustupov.restvoting.VoteTestData.*;
 import static ru.neustupov.restvoting.VoteTestData.VOTE6;
 import static ru.neustupov.restvoting.VoteTestData.VOTE_FOR_GET_BY_USER_ID_AND_DATE;

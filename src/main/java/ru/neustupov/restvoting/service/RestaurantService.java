@@ -17,9 +17,5 @@ public interface RestaurantService {
 
     List<Restaurant> getAll();
 
-    Restaurant getWithMenus(int id);
-
     Restaurant getWithVotes(int id);
-
-    Restaurant getWithMenusAndVotes(int id);
 }

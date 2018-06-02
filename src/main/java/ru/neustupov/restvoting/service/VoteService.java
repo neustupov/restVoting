@@ -18,15 +18,7 @@ public interface VoteService {
 
     List<Vote> getAll();
 
-    List<Vote> getAllByUser(int userId);
-
     List<Vote> getAllByRest(int restId);
-
-    Vote getWithUser(int id, int userId);
-
-    Vote getWithRestaurant(int id, int restId);
-
-    Vote getWithRestaurantAndUser(int id);
 
     Vote getByUserIdAndRestId(int userId, int restId);
 

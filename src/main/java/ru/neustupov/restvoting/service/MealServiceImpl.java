@@ -50,9 +50,4 @@ public class MealServiceImpl implements MealService{
         Assert.notNull(menuId, "menuId must not be null");
         return repository.getAll(menuId);
     }
-
-    @Override
-    public Meal getWithMenu(int id) {
-        return checkNotFoundWithId(repository.getWithMenu(id), id);
-    }
 }
