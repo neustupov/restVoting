@@ -27,25 +27,12 @@ public interface CrudVoteRepository extends JpaRepository<Vote, Integer> {
     @Query("SELECT v FROM Vote v")
     List<Vote> getAll();
 
-    @EntityGraph(attributePaths = {"restaurant"}, type = EntityGraph.EntityGraphType.LOAD)
-    @Query("SELECT v FROM Vote v WHERE v.user.id=:userId")
-    List<Vote> getAllByUserId(@Param("userId") int userId);
-
     @Query("SELECT v FROM Vote v WHERE v.restaurant.id=:restId")
     List<Vote> getAllByRestaurantId(@Param("restId") int restId);
 
-    //    https://stackoverflow.com/a/46013654/548473
-    @EntityGraph(attributePaths = {"restaurant"}, type = EntityGraph.EntityGraphType.LOAD)
-    @Query("SELECT v FROM Vote v WHERE v.id=?1")
-    Vote getWithRestaurant(int id, int restId);
-
-    @EntityGraph(attributePaths = {"user"}, type = EntityGraph.EntityGraphType.LOAD)
-    @Query("SELECT v FROM Vote v WHERE v.id=?1")
-    Vote getWithUser(int id, int userId);
-
     @EntityGraph(attributePaths = {"restaurant", "user"}, type = EntityGraph.EntityGraphType.LOAD)
     @Query("SELECT v FROM Vote v WHERE v.id=?1")
-    Vote getWithRestaurantAndUser(int id, int restId, int userId);
+    Vote getWithRestaurantAndUser(int id);
 
     @Query("SELECT v FROM Vote v WHERE v.user.id=:userId AND v.restaurant.id=:restId")
     Vote getByUserIdAndRestId(@Param("userId") int userId, @Param("restId") int restId);

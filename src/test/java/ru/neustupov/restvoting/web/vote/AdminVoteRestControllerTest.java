@@ -13,7 +13,6 @@ import ru.neustupov.restvoting.web.AbstractControllerTest;
 import ru.neustupov.restvoting.web.json.JsonUtil;
 
 import java.sql.Date;
-import java.util.List;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -23,8 +22,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static ru.neustupov.restvoting.RestaurantTestData.RUSSIA;
 import static ru.neustupov.restvoting.TestUtil.userHttpBasic;
 import static ru.neustupov.restvoting.UserTestData.ADMIN;
-import static ru.neustupov.restvoting.UserTestData.USER;
-import static ru.neustupov.restvoting.UserTestData.USER_ID;
 import static ru.neustupov.restvoting.VoteTestData.*;
 
 public class AdminVoteRestControllerTest extends AbstractControllerTest {
@@ -121,7 +118,7 @@ public class AdminVoteRestControllerTest extends AbstractControllerTest {
                 .param("restId", "100002"))
                 .andExpect(status().isOk());
 
-        assertMatch(voteService.get(VOTE1_ID, USER_ID), updated);
+        assertMatch(voteService.get(VOTE1_ID), updated);
     }
 
     @Test

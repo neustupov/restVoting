@@ -17,15 +17,7 @@ public interface MenuRepository {
 
     List<Menu> getAll(int restId);
 
-    default Menu getWithRestaurant(int id) {
-        throw new UnsupportedOperationException();
-    }
-
     default Menu findByRestaurantIdAndAddDate(int id, LocalDate currDate) { throw new UnsupportedOperationException();}
-
-    default Menu getWithRestaurantAndMeals(int id) {
-        throw new UnsupportedOperationException();
-    }
 
     List<Menu> getBetween(LocalDate startDate, LocalDate endDate, int restId);
 }

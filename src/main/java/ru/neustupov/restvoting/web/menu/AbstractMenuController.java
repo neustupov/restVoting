@@ -3,12 +3,10 @@ package ru.neustupov.restvoting.web.menu;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import ru.neustupov.restvoting.AuthorizedUser;
 import ru.neustupov.restvoting.model.Menu;
 import ru.neustupov.restvoting.service.MenuService;
 import ru.neustupov.restvoting.util.DateTimeUtil;
 
-import java.sql.Date;
 import java.time.LocalDate;
 import java.util.List;
 

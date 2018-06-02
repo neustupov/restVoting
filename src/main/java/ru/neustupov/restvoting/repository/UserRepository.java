@@ -1,6 +1,5 @@
 package ru.neustupov.restvoting.repository;
 
-
 import ru.neustupov.restvoting.model.User;
 
 import java.util.List;

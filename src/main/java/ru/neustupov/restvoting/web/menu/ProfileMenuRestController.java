@@ -4,8 +4,6 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import ru.neustupov.restvoting.model.Menu;
 
-import java.util.List;
-
 @RestController
 @RequestMapping(ProfileMenuRestController.REST_URL)
 public class ProfileMenuRestController extends AbstractMenuController{

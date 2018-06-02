@@ -15,8 +15,4 @@ public interface MealRepository {
     Meal get(int id);
 
     List<Meal> getAll(int menuId);
-
-    default Meal getWithMenu(int id){
-        throw new UnsupportedOperationException();
-    }
 }

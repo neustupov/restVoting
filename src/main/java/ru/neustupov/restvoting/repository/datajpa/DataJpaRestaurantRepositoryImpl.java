@@ -37,14 +37,4 @@ public class DataJpaRestaurantRepositoryImpl implements RestaurantRepository{
     public Restaurant getWithVotes(int id) {
         return crudRestaurantRepository.getWithVotes(id);
     }
-
-    @Override
-    public Restaurant getWithMenus(int id) {
-        return crudRestaurantRepository.getWithMenus(id);
-    }
-
-    @Override
-    public Restaurant getWithVotesAndMenus(int id) {
-        return crudRestaurantRepository.getWithVotesAndMenus(id);
-    }
 }
