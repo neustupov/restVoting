@@ -80,7 +80,7 @@ P.P.S.: Asume that your API will be used by a frontend developer to build fronte
        
        [{"id":100001,"name":"Admin","email":"admin@yandex.ru","registered":"2018-06-03T12:24:50.080+0000","enabled":true,"roles":["ROLE_ADMIN","ROLE_USER"],"votes":null},{"id":100000,"name":"User","email":"user@yandex.ru","registered":"2018-06-03T12:24:50.080+0000","enabled":true,"roles":["ROLE_USER"],"votes":null},{"id":100028,"name":"registered","email":"reguser@yandex.ru","registered":"2018-06-03T12:25:22.404+0000","enabled":true,"roles":["ROLE_USER"],"votes":null}]
        
-#### get Users 100001    
+### get Users 100001    
 #### Request
 
 `GET /rest/admin/users/100001`
@@ -102,7 +102,7 @@ P.P.S.: Asume that your API will be used by a frontend developer to build fronte
        
        {"id":100000,"name":"User","email":"user@yandex.ru","registered":"2018-06-03T12:51:32.915+0000","enabled":true,"roles":["ROLE_USER"],"votes":null}
        
-#### create User
+### create User
 #### Request
 
 `POST /rest/admin/users`
@@ -125,7 +125,7 @@ P.P.S.: Asume that your API will be used by a frontend developer to build fronte
        
        {"id":100028,"name":"New2","email":"adf@yand1e1x.ru","registered":"2018-06-03T13:00:00.616+0000","enabled":true,"roles":["ROLE_USER"]}
        
-#### update User 100001
+### update User 100001
 #### Request
 
 `PUT /rest/admin/users/100001`
@@ -144,7 +144,7 @@ P.P.S.: Asume that your API will be used by a frontend developer to build fronte
        Content-Length: 0
        Date: Sun, 03 Jun 2018 13:01:54 GMT
 
-#### validate with Error
+### validate with Error
 #### Request
 
 `POST /rest/admin/users`
@@ -166,7 +166,7 @@ P.P.S.: Asume that your API will be used by a frontend developer to build fronte
        
        {"url":"http://localhost:8080/rest/admin/users","type":"VALIDATION_ERROR","details":["name размер должен быть между 2 и 100","email определен в неверном формате","name не может быть пусто"]}
 
-#### delete User 100000
+### delete User 100000
 #### Request
 
 `DELETE /rest/admin/users/100000`
@@ -184,7 +184,7 @@ P.P.S.: Asume that your API will be used by a frontend developer to build fronte
        X-Content-Type-Options: nosniff
        Date: Sun, 03 Jun 2018 13:08:55 GMT
 
-#### get Restaurant 100002
+### get Restaurant 100002
 #### Request
 
 `GET /rest/admin/restaurants/100002`
@@ -206,7 +206,7 @@ P.P.S.: Asume that your API will be used by a frontend developer to build fronte
        
        {"id":100002,"name":"Russia","menus":null,"votes":null}
        
-#### get All Restaurants
+### get All Restaurants
 #### Request
 
 `GET /rest/admin/restaurants`
@@ -228,7 +228,7 @@ P.P.S.: Asume that your API will be used by a frontend developer to build fronte
        
        [{"id":100002,"name":"Russia","numberOfVotes":1},{"id":100003,"name":"Ukraine","numberOfVotes":0},{"id":100004,"name":"U Kolyana","numberOfVotes":0},{"id":100005,"name":"Almaz","numberOfVotes":0},{"id":100006,"name":"Fart","numberOfVotes":0}]
        
-#### create Restaurant
+### create Restaurant
 #### Request
 
 `POST /rest/admin/restaurants`
@@ -251,7 +251,7 @@ P.P.S.: Asume that your API will be used by a frontend developer to build fronte
        
        {"id":100029,"name":"New123"}
        
-#### update Restaurant 100002
+### update Restaurant 100002
 #### Request
 
 `PUT /rest/admin/restaurants/100002`
@@ -270,7 +270,7 @@ P.P.S.: Asume that your API will be used by a frontend developer to build fronte
        Content-Length: 0
        Date: Sun, 03 Jun 2018 13:15:38 GMT
 
-#### delete Restaurant 100002
+### delete Restaurant 100002
 #### Request
 
 `DELETE /rest/admin/restaurants/100002`
@@ -288,7 +288,7 @@ P.P.S.: Asume that your API will be used by a frontend developer to build fronte
        X-Content-Type-Options: nosniff
        Date: Sun, 03 Jun 2018 13:16:47 GMT
 
-#### get Menu 100007
+### get Menu 100007
 #### Request
 
 `GET /rest/admin/menus/100007`
@@ -310,7 +310,7 @@ P.P.S.: Asume that your API will be used by a frontend developer to build fronte
        
        {"id":100007,"addDate":"2015-05-01","meals":null,"restaurant":null}
        
-#### get All Menus for Restaurant 100002
+### get All Menus for Restaurant 100002
 #### Request
 
 `GET /rest/admin/menus?restId=100002`
@@ -332,7 +332,7 @@ P.P.S.: Asume that your API will be used by a frontend developer to build fronte
        
        [{"id":100007,"addDate":"2015-05-01","meals":null,"restaurant":null},{"id":100012,"addDate":"2015-05-02","meals":null,"restaurant":null},{"id":100013,"addDate":"2018-06-03","meals":null,"restaurant":null}]
        
-#### get todays Menu with meals for Restaurant 100002
+### get todays Menu with meals for Restaurant 100002
 #### Request
 
 `GET /rest/admin/menus/todays?restId=100002`
@@ -354,7 +354,7 @@ P.P.S.: Asume that your API will be used by a frontend developer to build fronte
        
        {"id":100013,"addDate":"2018-06-03","meals":[{"id":100020,"name":"Mango","price":100}],"restaurant":null}
        
-#### create Menu
+### create Menu
 #### Request
 
 `POST /rest/admin/menus?restId=100002`
@@ -377,7 +377,7 @@ P.P.S.: Asume that your API will be used by a frontend developer to build fronte
        
        {"id":100028,"addDate":"2015-06-01","restaurant":null}
        
-#### update Menu 100007
+### update Menu 100007
 #### Request
 
 `PUT /rest/admin/menus/100007?restId=100002`
@@ -396,7 +396,7 @@ P.P.S.: Asume that your API will be used by a frontend developer to build fronte
        Content-Length: 0
        Date: Sun, 03 Jun 2018 13:34:32 GMT
 
-#### delete Menu 100007
+### delete Menu 100007
 #### Request
 
 `DELETE /rest/admin/menus/100007`
@@ -414,7 +414,7 @@ P.P.S.: Asume that your API will be used by a frontend developer to build fronte
        X-Content-Type-Options: nosniff
        Date: Sun, 03 Jun 2018 13:35:46 GMT
 
-#### get Menus between Dates for Restaurant 100002
+### get Menus between Dates for Restaurant 100002
 #### Request
 
 `GET /rest/admin/menus/filter?startDate=2015-05-01&endDate=2015-05-03&restId=100002`
@@ -436,7 +436,7 @@ P.P.S.: Asume that your API will be used by a frontend developer to build fronte
        
        [{"id":100012,"addDate":"2015-05-02","meals":[],"restaurant":null},{"id":100007,"addDate":"2015-05-01","meals":[{"id":100019,"name":"Bottle of water","price":50},{"id":100014,"name":"Apple","price":5}],"restaurant":null}]
        
-#### get Meal 100014
+### get Meal 100014
 #### Request
 
 `GET /rest/admin/meals/100014`
@@ -458,7 +458,7 @@ P.P.S.: Asume that your API will be used by a frontend developer to build fronte
        
        {"id":100014,"name":"Apple","price":5,"menu":null}
        
-#### get All Meals for Menu 100007
+### get All Meals for Menu 100007
 #### Request
 
 `GET /rest/admin/meals?menuId=100007`
@@ -480,7 +480,7 @@ P.P.S.: Asume that your API will be used by a frontend developer to build fronte
        
        [{"id":100014,"name":"Apple","price":5,"menu":null},{"id":100019,"name":"Bottle of water","price":50,"menu":null}]
        
-#### create Meal
+### create Meal
 #### Request
 
 `POST /rest/admin/meals?menuId=100007`
@@ -503,7 +503,7 @@ P.P.S.: Asume that your API will be used by a frontend developer to build fronte
        
        {"id":100028,"name":"New123","price":123,"menu":null}
        
-#### update Meal 100014
+### update Meal 100014
 #### Request
 
 `PUT /rest/admin/meals/100014?menuId=100007`
@@ -522,7 +522,7 @@ P.P.S.: Asume that your API will be used by a frontend developer to build fronte
        Content-Length: 0
        Date: Sun, 03 Jun 2018 15:39:50 GMT
 
-#### delete Menu 100007
+### delete Menu 100007
 #### Request
 
 `DELETE /rest/admin/meals/100014?menuId=100007`
@@ -540,7 +540,7 @@ P.P.S.: Asume that your API will be used by a frontend developer to build fronte
        X-Content-Type-Options: nosniff
        Date: Sun, 03 Jun 2018 15:41:10 GMT
 
-#### validate with Error
+### validate with Error
 #### Request
 
 `PUT /rest/admin/meals/100014?menuId=100007`
@@ -562,7 +562,7 @@ P.P.S.: Asume that your API will be used by a frontend developer to build fronte
 
        {"url":"http://localhost:8080/rest/admin/meals/100014","type":"VALIDATION_ERROR","details":["name размер должен быть между 2 и 100","name не может быть пусто","price должно быть задано"]}
        
-#### get Vote 100021
+### get Vote 100021
 #### Request
 
 `GET /rest/admin/votes/100024`
@@ -584,7 +584,7 @@ P.P.S.: Asume that your API will be used by a frontend developer to build fronte
        
        {"id":100024,"user":{"id":100001,"name":"Admin","email":"admin@yandex.ru","registered":"2018-06-03T15:18:45.099+0000","enabled":true,"roles":["ROLE_USER","ROLE_ADMIN"],"votes":null},"date":"2015-04-30T21:00:00.000+0000","restaurant":{"id":100005,"name":"Almaz","menus":null,"votes":null}}
        
-#### get All Votes for all
+### get All Votes for all
 #### Request
 
 `GET /rest/admin/votes`
@@ -606,7 +606,7 @@ P.P.S.: Asume that your API will be used by a frontend developer to build fronte
        
        [{"id":100021,"user":null,"date":"2015-04-30T21:00:00.000+0000","restaurant":{"id":100002,"name":"Russia","menus":null,"votes":null}},{"id":100022,"user":null,"date":"2015-05-01T21:00:00.000+0000","restaurant":{"id":100003,"name":"Ukraine","menus":null,"votes":null}},{"id":100023,"user":null,"date":"2015-05-02T21:00:00.000+0000","restaurant":{"id":100004,"name":"U Kolyana","menus":null,"votes":null}},{"id":100024,"user":null,"date":"2015-04-30T21:00:00.000+0000","restaurant":{"id":100005,"name":"Almaz","menus":null,"votes":null}},{"id":100025,"user":null,"date":"2015-05-01T21:00:00.000+0000","restaurant":{"id":100006,"name":"Fart","menus":null,"votes":null}},{"id":100026,"user":null,"date":"2015-05-02T21:00:00.000+0000","restaurant":{"id":100002,"name":"Russia","menus":null,"votes":null}},{"id":100027,"user":null,"date":"2018-06-02T21:00:00.000+0000","restaurant":{"id":100002,"name":"Russia","menus":null,"votes":null}}]
        
-#### create Vote for Restaurant 100002 and ADMIN
+### create Vote for Restaurant 100002 and ADMIN
 #### Request
 
 `POST /rest/admin/votes?restId=100002`
@@ -631,7 +631,7 @@ P.P.S.: Asume that your API will be used by a frontend developer to build fronte
        
        {"id":100029,"user":null,"date":"2018-04-10T00:00:00.000+0000","restaurant":null}
        
-#### update Vote 100021 - Exception (update is after StopTime for voting)
+### update Vote 100021 - Exception (update is after StopTime for voting)
 #### Request
 
 `PUT /rest/admin/votes/100021?restId=100003`
@@ -656,7 +656,7 @@ P.P.S.: Asume that your API will be used by a frontend developer to build fronte
 
        {"url":"http://localhost:8080/rest/admin/votes/100021","type":"APP_ERROR","details":["java.time.DateTimeException: time is after Stop Time"]}
 
-#### delete Vote 100021
+### delete Vote 100021
 #### Request
 
 `DELETE /rest/admin/votes/100024`
