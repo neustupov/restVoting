@@ -30,6 +30,10 @@
 #### update Profile
 `curl -s -X PUT -d '{"name": "UserUpdated", "email":"new1@yandex.ru","password": "passwordNew","roles": ["ROLE_USER"]}' -H 'Content-Type: application/json' http://localhost:8080/rest/profile --user user@yandex.ru:password`
 
+### Test RootController
+#### register User
+`curl -s -X POST -d '{"name": "registered","email": "reguser@yandex.ru","password": "passwordNew","roles": ["ROLE_USER"]}' -H 'Content-Type:application/json;charset=UTF-8' http://localhost:8080/rest/register`
+
 ### Test AdminRestaurantRestController
 
 #### get Restaurant 100002
