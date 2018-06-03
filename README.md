@@ -28,18 +28,21 @@ P.P.S.: Asume that your API will be used by a frontend developer to build fronte
 
 -----------------------------
 
-#REST API
------------------------------
-The REST API to the example app is described below.
+# REST API
+
 -----------------------------
 
-###New User Registration
-####Request
+## The REST API to the example app is described below.
+
+-----------------------------
+
+### New User Registration
+#### Request
 `POST /rest/register`
 
        curl -s -X POST -d '{"name": "registered","email": "reguser@yandex.ru","password": "passwordNew","roles": ["ROLE_USER"]}' -H 'Content-Type:application/json;charset=UTF-8' http://localhost:8080/rest/register
 
-####Response
+#### Response
        HTTP/1.1 201 Created
        Server: Apache-Coyote/1.1
        Cache-Control: no-cache, no-store, max-age=0, must-revalidate
@@ -55,14 +58,14 @@ The REST API to the example app is described below.
        
        {"id":100028,"name":"registered","email":"reguser@yandex.ru","registered":"2018-06-03T12:25:22.404+0000","enabled":true,"roles":["ROLE_USER"]}
 
-###get All Users
-####Request
+### get All Users
+#### Request
 
 `GET /rest/admin/users`
 
        curl -s http://localhost:8080/rest/admin/users --user admin@yandex.ru:admin
 
-####Response
+#### Response
        HTTP/1.1 200 OK
        Server: Apache-Coyote/1.1
        Cache-Control: no-cache, no-store, max-age=0, must-revalidate
