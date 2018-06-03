@@ -80,7 +80,7 @@ P.P.S.: Asume that your API will be used by a frontend developer to build fronte
        
        [{"id":100001,"name":"Admin","email":"admin@yandex.ru","registered":"2018-06-03T12:24:50.080+0000","enabled":true,"roles":["ROLE_ADMIN","ROLE_USER"],"votes":null},{"id":100000,"name":"User","email":"user@yandex.ru","registered":"2018-06-03T12:24:50.080+0000","enabled":true,"roles":["ROLE_USER"],"votes":null},{"id":100028,"name":"registered","email":"reguser@yandex.ru","registered":"2018-06-03T12:25:22.404+0000","enabled":true,"roles":["ROLE_USER"],"votes":null}]
        
-### get Users 100001    
+### get User 100001    
 #### Request
 
 `GET /rest/admin/users/100001`
