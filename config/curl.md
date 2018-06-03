@@ -62,7 +62,7 @@
 ### Test AdminMenuRestController
 
 #### get Menu 100007
-`curl -s http://localhost:8080/rest/admin/menus/100007?restId=100002 --user admin@yandex.ru:admin`
+`curl -s http://localhost:8080/rest/admin/menus/100007 --user admin@yandex.ru:admin`
 
 #### get All Menus for Restaurant 100002
 `curl -s http://localhost:8080/rest/admin/menus?restId=100002 --user admin@yandex.ru:admin`
@@ -79,6 +79,9 @@
 #### update Menu 100007
 `curl -s -X PUT -d '{"addDate": "2017-06-01T10:00"}' -H 'Content-Type: application/json' http://localhost:8080/rest/admin/menus/100007?restId=100002 --user admin@yandex.ru:admin`
 
+#### get Menus between Dates for Restaurant 100002
+`curl -s http://localhost:8080/rest/admin/menus/filter?startDate=2015-05-01&endDate=2015-05-03&restId=100002 --user admin@yandex.ru:admin`
+
 ### Test ProfileMenuRestController
 
 #### get todays Menu with meals for Restaurant 100002
@@ -87,7 +90,7 @@
 ### Test AdminMealRestController
 
 #### get Meal 100014
-`curl -s http://localhost:8080/rest/admin/meals/100014?menuId=100007 --user admin@yandex.ru:admin`
+`curl -s http://localhost:8080/rest/admin/meals/100014 --user admin@yandex.ru:admin`
 
 #### get All Meals for Menu 100007
 `curl -s http://localhost:8080/rest/admin/meals?menuId=100007 --user admin@yandex.ru:admin`
