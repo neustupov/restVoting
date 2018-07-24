@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/neustupov/restVoting.svg?branch=master)](https://travis-ci.org/neustupov/restVoting)
+
 ## Тестовое задание на оплачиваемую стажировку
 
 Design and implement a REST API using Hibernate/Spring/SpringMVC (or Spring-Boot) **without frontend**.
