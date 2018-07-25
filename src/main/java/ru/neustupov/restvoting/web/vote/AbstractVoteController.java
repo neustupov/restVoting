@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import ru.neustupov.restvoting.AuthorizedUser;
 import ru.neustupov.restvoting.model.Vote;
 import ru.neustupov.restvoting.service.VoteService;
+import ru.neustupov.restvoting.to.VoteTo;
 import ru.neustupov.restvoting.util.DateTimeUtil;
 import ru.neustupov.restvoting.util.ValidationUtil;
 
@@ -14,6 +15,7 @@ import java.time.LocalTime;
 import java.util.List;
 
 import static ru.neustupov.restvoting.util.ValidationUtil.checkNew;
+import static ru.neustupov.restvoting.util.ValidationUtil.checkNewTo;
 
 public abstract class AbstractVoteController {
 
@@ -52,12 +54,27 @@ public abstract class AbstractVoteController {
         return service.create(vote, userId, restId);
     }
 
+    public Vote createFromTo(VoteTo voteTo, int restId) {
+        int userId = AuthorizedUser.get().getId();
+        checkNewTo(voteTo);
+        log.info("create {} for user {} and restaurant {}", voteTo, userId, restId);
+        return service.create(new Vote(voteTo.getDate()), userId, restId);
+    }
+
     public void update(int id, Vote vote, int restId) {
         int userId = AuthorizedUser.get().getId();
         vote.setId(id);
         ValidationUtil.checkTimeForVote(STOP_TIME);
         log.info("update {} for user {} and restaurant {}", vote, userId, restId);
         service.update(vote, userId, restId);
+    }
+
+    public void updateFromTo(int id, VoteTo voteTo, int restId){
+        int userId = AuthorizedUser.get().getId();
+        voteTo.setId(id);
+        ValidationUtil.checkTimeForVote(STOP_TIME);
+        log.info("update {} for user {} and restaurant {}", voteTo, userId, restId);
+        service.update(new Vote(voteTo.getDate()), userId, restId);
     }
 
     public Vote getByUserIdAndRestId(int restId) {
@@ -75,7 +92,7 @@ public abstract class AbstractVoteController {
         return service.getTodaysVotes();
     }
 
-    public List<Vote> getTodaysVotesOfAuthUserAndRest(int restId){
+    public List<Vote> getTodaysVotesOfAuthUserAndRest(int restId) {
         return service.getTodaysVotesOfAuthUserAndRest(restId);
     }
 
