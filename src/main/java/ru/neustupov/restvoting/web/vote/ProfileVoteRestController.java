@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import ru.neustupov.restvoting.View;
 import ru.neustupov.restvoting.model.Vote;
+import ru.neustupov.restvoting.to.VoteTo;
 
 import java.net.URI;
 
@@ -17,8 +18,9 @@ public class ProfileVoteRestController extends AbstractVoteController{
     static final String REST_URL = "/rest/profile/votes";
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Vote> createWithLocation(@Validated(View.Web.class) @RequestBody Vote vote, @RequestParam("restId") int restId) {
-        Vote created = super.create(vote, restId);
+    public ResponseEntity<Vote> createWithLocation(@Validated(View.Web.class) @RequestBody VoteTo voteTo,
+                                                   @RequestParam("restId") int restId) {
+        Vote created = super.createFromTo(voteTo, restId);
 
         URI uriOfNewResource = ServletUriComponentsBuilder.fromCurrentContextPath()
                 .path(REST_URL + "/{id}")
@@ -27,10 +29,9 @@ public class ProfileVoteRestController extends AbstractVoteController{
         return ResponseEntity.created(uriOfNewResource).body(created);
     }
 
-    @Override
     @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public void update(@PathVariable("id") int id, @Validated(View.Web.class) @RequestBody Vote vote,
+    public void update(@PathVariable("id") int id, @Validated(View.Web.class) @RequestBody VoteTo voteTo,
                        @RequestParam("restId") int restId) {
-        super.update(id, vote, restId);
+        super.updateFromTo(id, voteTo, restId);
     }
 }
