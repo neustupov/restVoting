@@ -613,9 +613,7 @@ P.P.S.: Asume that your API will be used by a frontend developer to build fronte
 
 `POST /rest/admin/votes?restId=100002`
 
-      curl -s -X POST -d '{"user":{"id":100001,"name": "Admin","password": "password",
-      "registered":"2018-04-10T19:07:31.749+0000","roles": ["ROLE_ADMIN"],"votes": null},"date": "2018-04-10","restaurant": 
-      {"id": 100002,"name": "Russia","menus": null,"votes": null}}' -H 'Content-Type:application/json;charset=UTF-8' http://localhost:8080/rest/admin/votes?restId=100002 --user admin@yandex.ru:admin
+      curl -s -X POST -d '{"date": "2018-04-10"}' -H 'Content-Type:application/json;charset=UTF-8' http://localhost:8080/rest/admin/votes?restId=100002 --user admin@yandex.ru:admin
               
 #### Response
        HTTP/1.1 201 Created
@@ -633,14 +631,36 @@ P.P.S.: Asume that your API will be used by a frontend developer to build fronte
        
        {"id":100029,"user":null,"date":"2018-04-10T00:00:00.000+0000","restaurant":null}
        
+### create Vote for Restaurant 100003 and USER
+#### Request
+       
+`POST /rest/profile/votes?restId=100003`
+       
+        curl -s -X POST -d '{"date": "2018-05-10"}' -H 'Content-Type:application/json;charset=UTF-8' http://localhost:8080/rest/profile/votes?restId=100003 --user user@yandex.ru:password
+                     
+#### Response
+        HTTP/1.1 201 Created
+              Server: Apache-Coyote/1.1
+              Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+              Pragma: no-cache
+              Expires: 0
+              X-XSS-Protection: 1; mode=block
+              X-Frame-Options: DENY
+              X-Content-Type-Options: nosniff
+              Location: http://localhost:8080/rest/admin/votes/100029
+              Content-Type: application/json;charset=UTF-8
+              Transfer-Encoding: chunked
+              Date: Sun, 03 Jun 2018 15:53:48 GMT
+              
+              {"id":100029,"user":null,"date":"2018-04-10T00:00:00.000+0000","restaurant":null}
+              
+       
 ### update Vote 100021 - Exception (update is after StopTime for voting)
 #### Request
 
 `PUT /rest/admin/votes/100021?restId=100003`
 
-      curl -s -X PUT -d '{"user":{"id":100001,"name": "Admin","password": "password",
-                          "registered":"2018-04-10T19:07:31.749+0000","roles": ["ROLE_ADMIN"],"votes": null},"date": "2017-04-10","restaurant": 
-                          {"id": 100003,"name": "Ukraine","menus": null,"votes": null}}' -H 'Content-Type: application/json' http://localhost:8080/rest/admin/votes/100021?restId=100003 --user admin@yandex.ru:admin
+      curl -s -X PUT -d '{"date": "2018-04-10"}' -H 'Content-Type: application/json' http://localhost:8080/rest/admin/votes/100021?restId=100003 --user admin@yandex.ru:admin
                           
 #### Response
        HTTP/1.1 500 Internal Server Error

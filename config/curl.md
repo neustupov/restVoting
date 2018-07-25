@@ -124,26 +124,15 @@
 `curl -s http://localhost:8080/rest/admin/votes --user admin@yandex.ru:admin`
 
 #### create Vote for Restaurant 100002 and ADMIN
-`curl -s -X POST -d '{"user":{"id":100001,"name": "Admin","password": "password",
-"registered":"2018-04-10T19:07:31.749+0000","roles": ["ROLE_ADMIN"],"votes": null},"date": "2018-04-10","restaurant": 
-{"id": 100002,"name": "Russia","menus": null,"votes": null}}' -H 'Content-Type:application/json;charset=UTF-8' http://localhost:8080/rest/admin/votes?restId=100002 --user admin@yandex.ru:admin`
+`curl -s -X POST -d '{"date": "2018-04-10"}' -H 'Content-Type:application/json;charset=UTF-8' http://localhost:8080/rest/admin/votes?restId=100002 --user admin@yandex.ru:admin`
 
-#### update Vote 100021
-`curl -s -X PUT -d '{"user":{"id":100001,"name": "Admin","password": "password",
-                    "registered":"2018-04-10T19:07:31.749+0000","roles": ["ROLE_ADMIN"],"votes": null},"date": "2017-04-10","restaurant": 
-                    {"id": 100003,"name": "Ukraine","menus": null,"votes": null}}' -H 'Content-Type: application/json' http://localhost:8080/rest/admin/votes/100021?restId=100003 --user admin@yandex.ru:admin`
-
-#### update Vote 100021 - Exception
-`curl -s -X PUT -d '{"user":{"id":100001,"name": "Admin","password": "password",
-                    "registered":"2018-04-10T19:07:31.749+0000","roles": ["ROLE_ADMIN"],"votes": null},"date": "2018-04-10","restaurant": 
-                    {"id": 100003,"name": "Ukraine","menus": null,"votes": null}}' -H 'Content-Type: application/json' http://localhost:8080/rest/admin/votes/100021?restId=100003 --user admin@yandex.ru:admin`
+#### update Vote 100021 - Exception if System Time is after 11-00AM
+`curl -s -X PUT -d '{"date": "2018-04-10"}' -H 'Content-Type: application/json' http://localhost:8080/rest/admin/votes/100021?restId=100003 --user admin@yandex.ru:admin`
 
 #### delete Vote 100021
 `curl -s -X DELETE http://localhost:8080/rest/admin/votes/100024 --user admin@yandex.ru:admin`
 
 ### Test ProfileVoteRestController
 
-#### create Vote for Restaurant 100002 and USER
-`curl -s -X POST -d '{"user":{"id":100000,"name": "User", "email":"asd@ya.ru", "password": "password",
-"registered":"2018-04-10T19:07:31.749+0000","roles": ["ROLE_USER"],"votes": null},"date": "2018-04-10","restaurant": 
-{"id": 100002,"name": "Russia","menus": null,"votes": null}}' -H 'Content-Type:application/json;charset=UTF-8' http://localhost:8080/rest/profile/votes?restId=100002 --user user@yandex.ru:password`
+#### create Vote for Restaurant 100003 and USER
+`curl -s -X POST -d '{"date": "2018-05-10"}' -H 'Content-Type:application/json;charset=UTF-8' http://localhost:8080/rest/profile/votes?restId=100003 --user user@yandex.ru:password`
