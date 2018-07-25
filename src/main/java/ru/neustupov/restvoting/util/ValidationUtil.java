@@ -1,6 +1,7 @@
 package ru.neustupov.restvoting.util;
 
 import ru.neustupov.restvoting.model.AbstractBaseEntity;
+import ru.neustupov.restvoting.to.BaseTo;
 import ru.neustupov.restvoting.util.exception.NotFoundException;
 
 import java.time.DateTimeException;
@@ -33,6 +34,12 @@ public class ValidationUtil {
     public static void checkNew(AbstractBaseEntity entity) {
         if (!entity.isNew()) {
             throw new IllegalArgumentException(entity + " must be new (id=null)");
+        }
+    }
+
+    public static void checkNewTo(BaseTo to) {
+        if(!to.isNew()){
+            throw new IllegalArgumentException(to + " must be new (id=null)");
         }
     }
 
