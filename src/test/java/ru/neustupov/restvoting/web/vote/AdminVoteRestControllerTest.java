@@ -8,6 +8,7 @@ import org.springframework.test.web.servlet.ResultActions;
 import ru.neustupov.restvoting.TestUtil;
 import ru.neustupov.restvoting.model.Vote;
 import ru.neustupov.restvoting.service.VoteService;
+import ru.neustupov.restvoting.to.VoteTo;
 import ru.neustupov.restvoting.util.exception.ErrorType;
 import ru.neustupov.restvoting.web.AbstractControllerTest;
 import ru.neustupov.restvoting.web.json.JsonUtil;
@@ -77,12 +78,13 @@ public class AdminVoteRestControllerTest extends AbstractControllerTest {
 
     @Test
     public void testCreate() throws Exception {
+        VoteTo expectedTo = new VoteTo(Date.valueOf("2017-05-01"));
         Vote expected = new Vote(ADMIN, Date.valueOf("2017-05-01"), RUSSIA);
         ResultActions action = mockMvc.perform(post(REST_URL)
                 .with(userHttpBasic(ADMIN))
                 .param("restId", "100002")
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(JsonUtil.writeValue(expected)))
+                .content(JsonUtil.writeValue(expectedTo)))
                 .andExpect(status().isCreated());
 
         Vote returned = TestUtil.readFromJson(action, Vote.class);
@@ -110,11 +112,12 @@ public class AdminVoteRestControllerTest extends AbstractControllerTest {
     @Test
     public void testUpdate() throws Exception {
         Vote updated = new Vote(VOTE1);
-        updated.setDate(Date.valueOf("2017-06-01"));
+        VoteTo updatedTo = new VoteTo(Date.valueOf("2017-07-01"));
+        updated.setDate(Date.valueOf("2017-07-01"));
         mockMvc.perform(put(REST_URL + VOTE1_ID)
                 .with(userHttpBasic(ADMIN))
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(JsonUtil.writeValue(updated))
+                .content(JsonUtil.writeValue(updatedTo))
                 .param("restId", "100002"))
                 .andExpect(status().isOk());
 
