@@ -1,5 +1,6 @@
 package ru.neustupov.restvoting.to;
 
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -7,37 +8,22 @@ public class VoteTo extends BaseTo implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private int userId;
-
+    @NotNull
     private Date date;
-
-    private int restId;
 
     public VoteTo() {}
 
     public VoteTo(VoteTo voteTo) {
-        this(voteTo.getUserId(), voteTo.getDate(), voteTo.getRestId());
+        this(voteTo.getDate());
     }
 
-    public VoteTo(int userId, Date date, int restId) {
-        this.userId = userId;
+    public VoteTo(Date date) {
         this.date = date;
-        this.restId = restId;
     }
 
     public VoteTo(Integer id, int userId, Date date, int restId) {
         super(id);
-        this.userId = userId;
         this.date = date;
-        this.restId = restId;
-    }
-
-    public int getUserId() {
-        return userId;
-    }
-
-    public void setUserId(int userId) {
-        this.userId = userId;
     }
 
     public Date getDate() {
@@ -46,13 +32,5 @@ public class VoteTo extends BaseTo implements Serializable {
 
     public void setDate(Date date) {
         this.date = date;
-    }
-
-    public int getRestId() {
-        return restId;
-    }
-
-    public void setRestId(int restId) {
-        this.restId = restId;
     }
 }
