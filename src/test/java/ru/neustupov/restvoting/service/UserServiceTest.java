@@ -87,8 +87,6 @@ public class UserServiceTest extends AbstractServiceTest {
         validateRootCause(() -> service.create(new User(100500, "", "new@yandex.ru","Password", Date.from(Instant.now()), EnumSet.of(Role.ROLE_USER))), ConstraintViolationException.class);
         validateRootCause(() -> service.create(new User(100500, "TestUser", "yandex.ru","Password", Date.from(Instant.now()), EnumSet.of(Role.ROLE_USER))), ConstraintViolationException.class);
         validateRootCause(() -> service.create(new User(100500, "TestUser", "new@yandex.ru","", Date.from(Instant.now()), EnumSet.of(Role.ROLE_USER))), ConstraintViolationException.class);
-        //validateRootCause(() -> service.create(new User(100500, "TestUser", "new@yandex.ru","Pas", Date.from(Instant.now()), EnumSet.of(Role.ROLE_USER))), ConstraintViolationException.class);
-        //validateRootCause(() -> service.create(new User(100500, "TestUser", "new@yandex.ru","1234567890qwertyuiopsdfghjklzxcvbnmnbvcxzasdfghjklpoiuytrewq123459874563214569874563214569874563214569874", Date.from(Instant.now()), EnumSet.of(Role.ROLE_USER))), ConstraintViolationException.class);
         validateRootCause(() -> service.create(new User(100500, "TestUser", "new@yandex.ru","Password", null, EnumSet.of(Role.ROLE_USER))), ConstraintViolationException.class);
     }
 

@@ -20,8 +20,6 @@ public interface VoteService {
 
     List<Vote> getAllByRest(int restId);
 
-    Vote getByUserIdAndRestId(int userId, int restId);
-
     Vote getByUserIdAndDate(int userId);
 
     List<Vote> getTodaysVotes();

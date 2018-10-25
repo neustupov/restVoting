@@ -54,10 +54,8 @@ public abstract class AbstractMenuController {
     public List<Menu> getBetween(LocalDate startDate, LocalDate endDate, int restId) {
         log.info("getBetween dates({} - {}) for restaurant {}", startDate, endDate, restId);
 
-        List<Menu> mealsDateFiltered = service.getBetweenDates(
+        return service.getBetweenDates(
                 startDate != null ? startDate : DateTimeUtil.MIN_DATE,
                 endDate != null ? endDate : DateTimeUtil.MAX_DATE, restId);
-
-        return mealsDateFiltered;
     }
 }

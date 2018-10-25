@@ -1,10 +1,8 @@
 package ru.neustupov.restvoting.web.restaurant;
 
 import org.junit.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import ru.neustupov.restvoting.TestUtil;
-import ru.neustupov.restvoting.service.RestaurantService;
 import ru.neustupov.restvoting.web.AbstractControllerTest;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -18,9 +16,6 @@ import static ru.neustupov.restvoting.UserTestData.USER;
 public class ProfileRestaurantRestControllerTest extends AbstractControllerTest {
 
     private static final String REST_URL = ProfileRestaurantRestController.REST_URL + '/';
-
-    @Autowired
-    private RestaurantService restaurantService;
 
     @Test
     public void testGet() throws Exception {

@@ -1,6 +1,7 @@
 package ru.neustupov.restvoting.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.*;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 import ru.neustupov.restvoting.View;
@@ -8,6 +9,9 @@ import ru.neustupov.restvoting.View;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
+@Getter
+@Setter
+@NoArgsConstructor
 @Entity
 @Table(name = "meals")
 public class Meal extends AbstractNamedEntity {
@@ -23,15 +27,8 @@ public class Meal extends AbstractNamedEntity {
     @NotNull(groups = View.Persist.class)
     private Menu menu;
 
-    public Meal() {
-    }
-
     public Meal(Meal m) {
         this(m.getId(), m.getName(), m.getPrice());
-    }
-
-    public Meal(Integer price) {
-        this.price = price;
     }
 
     public Meal(int id, String name, int price) {
@@ -42,21 +39,5 @@ public class Meal extends AbstractNamedEntity {
     public Meal(String name, Integer price) {
         super(null, name);
         this.price = price;
-    }
-
-    public Integer getPrice() {
-        return price;
-    }
-
-    public void setPrice(Integer price) {
-        this.price = price;
-    }
-
-    public Menu getMenu() {
-        return menu;
-    }
-
-    public void setMenu(Menu menu) {
-        this.menu = menu;
     }
 }

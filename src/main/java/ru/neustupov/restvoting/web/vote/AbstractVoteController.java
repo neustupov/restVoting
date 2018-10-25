@@ -77,17 +77,6 @@ public abstract class AbstractVoteController {
         service.update(new Vote(voteTo.getDate()), userId, restId);
     }
 
-    public Vote getByUserIdAndRestId(int restId) {
-        int userId = AuthorizedUser.get().getId();
-        log.info("getByUserIdAndRestId userId {} restId {}", restId, userId);
-        return service.getByUserIdAndRestId(userId, restId);
-    }
-
-    public Vote getByUserIdAndDate() {
-        int userId = AuthorizedUser.get().getId();
-        return service.getByUserIdAndDate(userId);
-    }
-
     public List<Vote> getTodaysVotes() {
         return service.getTodaysVotes();
     }
@@ -99,10 +88,8 @@ public abstract class AbstractVoteController {
     public List<Vote> getBetween(LocalDate startDate, LocalDate endDate, int restId) {
         log.info("getBetween dates({} - {}) for restaurant {}", startDate, endDate, restId);
 
-        List<Vote> mealsDateFiltered = service.getBetween(
+        return service.getBetween(
                 startDate != null ? startDate : DateTimeUtil.MIN_DATE,
                 endDate != null ? endDate : DateTimeUtil.MAX_DATE, restId);
-
-        return mealsDateFiltered;
     }
 }

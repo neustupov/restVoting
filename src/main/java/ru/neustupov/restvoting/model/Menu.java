@@ -1,6 +1,9 @@
 package ru.neustupov.restvoting.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 import ru.neustupov.restvoting.View;
@@ -10,6 +13,9 @@ import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.util.Set;
 
+@Getter
+@Setter
+@NoArgsConstructor
 @Entity
 @Table(name = "menus")
 public class Menu extends AbstractBaseEntity {
@@ -28,9 +34,6 @@ public class Menu extends AbstractBaseEntity {
     @NotNull(groups = View.Persist.class)
     private Restaurant restaurant;
 
-    public Menu() {
-    }
-
     public Menu(Menu m) {
         this(m.getId(), m.getAddDate());
     }
@@ -38,33 +41,5 @@ public class Menu extends AbstractBaseEntity {
     public Menu(Integer id, LocalDate addDate) {
         super(id);
         this.addDate = addDate;
-    }
-
-    public Menu(LocalDate addDate) {
-        this.addDate = addDate;
-    }
-
-    public LocalDate getAddDate() {
-        return addDate;
-    }
-
-    public void setAddDate(LocalDate addDate) {
-        this.addDate = addDate;
-    }
-
-    public Set<Meal> getMeals() {
-        return meals;
-    }
-
-    public void setMeals(Set<Meal> meals) {
-        this.meals = meals;
-    }
-
-    public Restaurant getRestaurant() {
-        return restaurant;
-    }
-
-    public void setRestaurant(Restaurant restaurant) {
-        this.restaurant = restaurant;
     }
 }

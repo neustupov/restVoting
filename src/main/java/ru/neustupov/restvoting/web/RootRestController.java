@@ -24,8 +24,12 @@ public class RootRestController {
 
     protected final Logger log = LoggerFactory.getLogger(getClass());
 
+    private final UserService service;
+
     @Autowired
-    private UserService service;
+    public RootRestController(UserService service) {
+        this.service = service;
+    }
 
     @PostMapping(value = "/register",consumes = MediaType.APPLICATION_JSON_VALUE,
                                      produces = MediaType.APPLICATION_JSON_VALUE)

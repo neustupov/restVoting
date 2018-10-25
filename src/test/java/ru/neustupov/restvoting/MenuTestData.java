@@ -5,7 +5,6 @@ import ru.neustupov.restvoting.model.Menu;
 
 import java.time.LocalDate;
 import java.util.Arrays;
-import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
@@ -16,22 +15,13 @@ public class MenuTestData {
 
     public static final int RUSSIA_MENU_ID1 = START_SEQ + 7;
     public static final int UKRAINE_MENU_ID = START_SEQ + 8;
-    public static final int U_KOLYANA_MENU_ID = START_SEQ + 9;
-    public static final int ALMAZ_MENU_ID = START_SEQ + 10;
-    public static final int FART_MENU_ID = START_SEQ + 11;
     public static final int RUSSIA_MENU_ID2 = START_SEQ + 12;
     public static final int MENU_TODAYS_WITH_MEALS_ID = START_SEQ + 13;
 
     public static final Menu RUSSIA_MENU1 = new Menu(RUSSIA_MENU_ID1, LocalDate.of(2015, 5, 1));
-    public static final Menu UKRAINE_MENU = new Menu(UKRAINE_MENU_ID, LocalDate.of(2015, 5, 2));
-    public static final Menu U_KOLYANA_MENU = new Menu(U_KOLYANA_MENU_ID, LocalDate.of(2015, 5, 3));
-    public static final Menu ALMAZ_MENU = new Menu(ALMAZ_MENU_ID, LocalDate.of(2015, 5, 1));
-    public static final Menu FART_MENU = new Menu(FART_MENU_ID, LocalDate.of(2015, 5, 2));
     public static final Menu RUSSIA_MENU2 = new Menu(RUSSIA_MENU_ID2, LocalDate.of(2015, 5, 2));
 
     public static final Menu MENU_TODAYS_WITH_MEALS = new Menu(MENU_TODAYS_WITH_MEALS_ID, LocalDate.now());
-
-    public static final List<Menu> MENUS = Arrays.asList(RUSSIA_MENU1, UKRAINE_MENU, U_KOLYANA_MENU, ALMAZ_MENU, FART_MENU, RUSSIA_MENU2);
 
     public static Menu getCreated() {
         return new Menu(null, LocalDate.of(2015, 6, 1));
