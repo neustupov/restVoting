@@ -8,7 +8,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-import ru.neustupov.restvoting.View;
 import ru.neustupov.restvoting.model.User;
 import ru.neustupov.restvoting.service.UserService;
 
@@ -33,7 +32,7 @@ public class RootRestController {
 
     @PostMapping(value = "/register",consumes = MediaType.APPLICATION_JSON_VALUE,
                                      produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<User> createWithLocation(@Validated(View.Web.class) @RequestBody User user) {
+    public ResponseEntity<User> createWithLocation(@Validated @RequestBody User user) {
 
         log.info("create {}", user);
         checkNew(user);

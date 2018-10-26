@@ -26,7 +26,7 @@ public class User extends AbstractNamedEntity {
     @Email
     @NotNull(groups = View.Persist.class)
     @Size(max = 100)
-    @SafeHtml(groups = {View.Web.class})
+    @SafeHtml
     private String email;
 
     @Getter

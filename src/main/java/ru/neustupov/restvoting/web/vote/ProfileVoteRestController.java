@@ -5,7 +5,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-import ru.neustupov.restvoting.View;
 import ru.neustupov.restvoting.model.Vote;
 import ru.neustupov.restvoting.to.VoteTo;
 
@@ -18,7 +17,7 @@ public class ProfileVoteRestController extends AbstractVoteController{
     static final String REST_URL = "/rest/profile/votes";
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Vote> createWithLocation(@Validated(View.Web.class) @RequestBody VoteTo voteTo,
+    public ResponseEntity<Vote> createWithLocation(@Validated @RequestBody VoteTo voteTo,
                                                    @RequestParam("restId") int restId) {
         Vote created = super.createFromTo(voteTo, restId);
 
@@ -30,7 +29,7 @@ public class ProfileVoteRestController extends AbstractVoteController{
     }
 
     @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public void update(@PathVariable("id") int id, @Validated(View.Web.class) @RequestBody VoteTo voteTo,
+    public void update(@PathVariable("id") int id, @Validated @RequestBody VoteTo voteTo,
                        @RequestParam("restId") int restId) {
         super.updateFromTo(id, voteTo, restId);
     }

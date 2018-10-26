@@ -7,7 +7,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-import ru.neustupov.restvoting.View;
 import ru.neustupov.restvoting.model.Menu;
 
 import javax.validation.Valid;
@@ -40,7 +39,7 @@ public class AdminMenuRestController extends AbstractMenuController {
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Menu> createWithLocation(@Validated(View.Web.class) @RequestBody Menu menu,
+    public ResponseEntity<Menu> createWithLocation(@Validated @RequestBody Menu menu,
                                                    @RequestParam("restId") int restId) {
         Menu created = super.create(menu, restId);
 

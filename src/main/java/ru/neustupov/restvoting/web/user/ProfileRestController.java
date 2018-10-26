@@ -6,7 +6,6 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import ru.neustupov.restvoting.AuthorizedUser;
-import ru.neustupov.restvoting.View;
 import ru.neustupov.restvoting.model.User;
 
 @RestController
@@ -21,7 +20,7 @@ public class ProfileRestController extends AbstractUserController{
     }
 
     @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public void update(@Validated(View.Web.class) @RequestBody User user,
+    public void update(@Validated @RequestBody User user,
                        @AuthenticationPrincipal AuthorizedUser authorizedUser) {
         super.update(user, authorizedUser.getId());
     }

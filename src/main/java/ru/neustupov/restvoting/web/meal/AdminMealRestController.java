@@ -6,7 +6,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-import ru.neustupov.restvoting.View;
 import ru.neustupov.restvoting.model.Meal;
 
 import java.net.URI;
@@ -31,7 +30,7 @@ public class AdminMealRestController extends AbstractMealController{
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Meal> createWithLocation(@Validated(View.Web.class) @RequestBody Meal meal, @RequestParam("menuId") int menuId) {
+    public ResponseEntity<Meal> createWithLocation(@Validated @RequestBody Meal meal, @RequestParam("menuId") int menuId) {
         Meal created = super.create(meal, menuId);
 
         URI uriOfNewResource = ServletUriComponentsBuilder.fromCurrentContextPath()
@@ -43,7 +42,7 @@ public class AdminMealRestController extends AbstractMealController{
 
     @Override
     @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public void update(@PathVariable("id") int id,@Validated(View.Web.class) @RequestBody Meal meal, @RequestParam("menuId") int menuId) {
+    public void update(@PathVariable("id") int id,@Validated @RequestBody Meal meal, @RequestParam("menuId") int menuId) {
         super.update(id, meal, menuId);
     }
 
