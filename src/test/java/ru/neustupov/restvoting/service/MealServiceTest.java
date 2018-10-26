@@ -2,12 +2,14 @@ package ru.neustupov.restvoting.service;
 
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import ru.neustupov.restvoting.model.Meal;
 import ru.neustupov.restvoting.util.exception.NotFoundException;
 
 import javax.validation.ConstraintViolationException;
 
 import static ru.neustupov.restvoting.MealTestData.*;
+import static ru.neustupov.restvoting.MenuTestData.NULL_MENU;
 import static ru.neustupov.restvoting.MenuTestData.RUSSIA_MENU_ID1;
 import static ru.neustupov.restvoting.MenuTestData.UKRAINE_MENU_ID;
 
@@ -32,6 +34,12 @@ public class MealServiceTest extends AbstractServiceTest{
         Meal created = getCreated();
         service.create(created, RUSSIA_MENU_ID1);
         assertMatch(service.getAll(RUSSIA_MENU_ID1), APPLE, BOTTLE_OF_WATER, created);
+    }
+
+    @Test(expected = DataIntegrityViolationException.class)
+    public void createWithNullMenu(){
+        Meal created = getCreated();
+        service.create(created, NULL_MENU);
     }
 
     @Test

@@ -6,7 +6,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.validator.constraints.SafeHtml;
 import org.springframework.util.CollectionUtils;
-import ru.neustupov.restvoting.View;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -24,7 +23,7 @@ public class User extends AbstractNamedEntity {
     @Setter
     @Column(name = "email", nullable = false, unique = true)
     @Email
-    @NotNull(groups = View.Persist.class)
+    @NotBlank
     @Size(max = 100)
     @SafeHtml
     private String email;
@@ -55,7 +54,6 @@ public class User extends AbstractNamedEntity {
     @CollectionTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"))
     @Column(name = "role")
     @ElementCollection(fetch = FetchType.EAGER)
-    @NotNull(groups = View.Persist.class)
     private Set<Role> roles;
 
     @Getter

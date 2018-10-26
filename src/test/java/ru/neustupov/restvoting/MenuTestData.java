@@ -18,6 +18,8 @@ public class MenuTestData {
     public static final int RUSSIA_MENU_ID2 = START_SEQ + 12;
     public static final int MENU_TODAYS_WITH_MEALS_ID = START_SEQ + 13;
 
+    public static final int NULL_MENU = 100500;
+
     public static final Menu RUSSIA_MENU1 = new Menu(RUSSIA_MENU_ID1, LocalDate.of(2015, 5, 1));
     public static final Menu RUSSIA_MENU2 = new Menu(RUSSIA_MENU_ID2, LocalDate.of(2015, 5, 2));
 

@@ -23,6 +23,9 @@ public class DataJpaMealRepositoryImpl implements MealRepository {
         if (!meal.isNew() && get(meal.getId()) == null) {
             return null;
         }
+        if(crudMenuRepository.getOne(menuId) == null) {
+            return null;
+        }
         meal.setMenu(crudMenuRepository.getOne(menuId));
         return crudMealRepository.save(meal);
     }

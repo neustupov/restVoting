@@ -24,6 +24,9 @@ public class DataJpaMenuRepositoryImpl implements MenuRepository {
         if (!menu.isNew() && get(menu.getId()) == null) {
             return null;
         }
+        if(crudRestaurantRepository.getOne(restId) == null){
+            return null;
+        }
         menu.setRestaurant(crudRestaurantRepository.getOne(restId));
         return crudMenuRepository.save(menu);
     }

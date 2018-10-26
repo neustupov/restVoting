@@ -18,6 +18,8 @@ public class RestaurantTestData {
     public static final int ALMAZ_ID = START_SEQ + 5;
     public static final int FART_ID = START_SEQ + 6;
 
+    public static final int NULL_ID = 100600;
+
     public static final Restaurant RUSSIA = new Restaurant(RUSSIA_ID, "Russia");
     public static final Restaurant UKRAINE = new Restaurant(UKRAINE_ID, "Ukraine");
     public static final Restaurant U_KOLYANA = new Restaurant(U_KOLYANA_ID, "U Kolyana");
