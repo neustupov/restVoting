@@ -3,6 +3,7 @@ package ru.neustupov.restvoting.repository;
 import ru.neustupov.restvoting.model.Menu;
 
 import java.time.LocalDate;
+import java.util.Collection;
 import java.util.List;
 
 public interface MenuRepository {
@@ -18,6 +19,8 @@ public interface MenuRepository {
     List<Menu> getAll(int restId);
 
     default Menu findByRestaurantIdAndAddDate(int id, LocalDate currDate) { throw new UnsupportedOperationException();}
+
+    Collection<Menu> findAllTodaysMenus(LocalDate currDate);
 
     List<Menu> getBetween(LocalDate startDate, LocalDate endDate, int restId);
 }

@@ -42,6 +42,9 @@
 #### get All Restaurants
 `curl -s http://localhost:8080/rest/admin/restaurants --user admin@yandex.ru:admin`
 
+#### get All Restaurants with votes and meals from todays menu
+`curl -s http://localhost:8080/rest/admin/restaurants/all --user admin@yandex.ru:admin`
+
 #### create Restaurant
 `curl -s -X POST -d '{"name": "New123"}' -H 'Content-Type:application/json;charset=UTF-8' http://localhost:8080/rest/admin/restaurants --user admin@yandex.ru:admin`
 

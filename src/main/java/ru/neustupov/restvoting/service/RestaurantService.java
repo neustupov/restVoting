@@ -1,6 +1,7 @@
 package ru.neustupov.restvoting.service;
 
 import ru.neustupov.restvoting.model.Restaurant;
+import ru.neustupov.restvoting.to.RestaurantWithTodaysMenu;
 import ru.neustupov.restvoting.util.exception.NotFoundException;
 
 import java.util.List;
@@ -18,4 +19,6 @@ public interface RestaurantService {
     List<Restaurant> getAll();
 
     Restaurant getWithVotes(int id);
+
+    List<RestaurantWithTodaysMenu> getAllRestaurantsWithMealsFromTodaysMenu();
 }
