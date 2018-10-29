@@ -230,6 +230,27 @@ P.P.S.: Asume that your API will be used by a frontend developer to build fronte
        
        [{"id":100002,"name":"Russia","numberOfVotes":1},{"id":100003,"name":"Ukraine","numberOfVotes":0},{"id":100004,"name":"U Kolyana","numberOfVotes":0},{"id":100005,"name":"Almaz","numberOfVotes":0},{"id":100006,"name":"Fart","numberOfVotes":0}]
        
+### get All Restaurants with with votes and meals from todays menu
+#### Request
+
+`GET /rest/admin/restaurants/all`
+
+       curl -s http://localhost:8080/rest/admin/restaurants/all --user admin@yandex.ru:admin
+       
+#### Response
+       HTTP/1.1 200 
+       Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+       Pragma: no-cache
+       Expires: 0
+       X-XSS-Protection: 1; mode=block
+       X-Frame-Options: DENY
+       X-Content-Type-Options: nosniff
+       Content-Type: application/json;charset=UTF-8
+       Transfer-Encoding: chunked
+       Date: Mon, 29 Oct 2018 19:34:12 GMT
+
+       [{"id":100002,"name":"Russia","numberOfVotes":1,"mealsFromTodaysMenu":[{"id":100020,"name":"Mango","price":100,"menu":{"id":100013,"addDate":"2018-10-29","restaurant":null}}]},{"id":100003,"name":"Ukraine","numberOfVotes":0,"mealsFromTodaysMenu":[]},{"id":100004,"name":"U Kolyana","numberOfVotes":0,"mealsFromTodaysMenu":[]},{"id":100005,"name":"Almaz","numberOfVotes":0,"mealsFromTodaysMenu":[]},{"id":100006,"name":"Fart","numberOfVotes":0,"mealsFromTodaysMenu":[]}]
+       
 ### create Restaurant
 #### Request
 
