@@ -1,6 +1,7 @@
 package ru.neustupov.restvoting.repository;
 
 import ru.neustupov.restvoting.model.Vote;
+import ru.neustupov.restvoting.to.VoteCount;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -25,6 +26,8 @@ public interface VoteRepository {
     List<Vote> getTodaysVotes();
 
     List<Vote> getTodaysVotesOfAuthUserAndRest(int userId, int restId);
+
+    List<VoteCount> getVoteCountForCurrentDate();
 
     List<Vote> getBetween(LocalDate startDate, LocalDate endDate, int restId);
 }
