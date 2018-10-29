@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import ru.neustupov.restvoting.model.Menu;
 
 import java.time.LocalDate;
+import java.util.Collection;
 import java.util.List;
 
 @Transactional(readOnly = true)
@@ -29,6 +30,10 @@ public interface CrudMenuRepository extends JpaRepository<Menu, Integer> {
     @EntityGraph(attributePaths = {"meals"}, type = EntityGraph.EntityGraphType.LOAD)
     @Query("SELECT DISTINCT m FROM Menu m WHERE m.restaurant.id=:restId AND m.addDate=:currDate")
     Menu findByRestaurantIdAndAddDate(@Param("restId") int restId, @Param("currDate") LocalDate currDate);
+
+    @EntityGraph(attributePaths = {"meals"}, type = EntityGraph.EntityGraphType.LOAD)
+    @Query("SELECT m FROM Menu m WHERE m.addDate=:currDate")
+    Collection<Menu> findAllTodaysMenus(@Param("currDate") LocalDate currDate);
 
     @SuppressWarnings("JpaQlInspection")
     @EntityGraph(attributePaths = {"meals"}, type = EntityGraph.EntityGraphType.LOAD)
