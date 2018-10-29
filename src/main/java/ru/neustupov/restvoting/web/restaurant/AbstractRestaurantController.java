@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import ru.neustupov.restvoting.model.Restaurant;
 import ru.neustupov.restvoting.service.RestaurantService;
 import ru.neustupov.restvoting.service.VoteService;
+import ru.neustupov.restvoting.to.RestaurantWithTodaysMenu;
 import ru.neustupov.restvoting.to.RestaurantWithVotes;
 import ru.neustupov.restvoting.util.RestaurantsUtil;
 
@@ -37,6 +38,11 @@ public abstract class AbstractRestaurantController {
     public List<RestaurantWithVotes> getAll() {
         log.info("getAll restaurants {}");
         return RestaurantsUtil.getWithVotes(restaurantService.getAll(), voteService.getTodaysVotes());
+    }
+
+    public List<RestaurantWithTodaysMenu> getAllRestaurantsWithMealsFromTodaysMenu() {
+        log.info("getAll restaurants with meals from todays menu");
+        return restaurantService.getAllRestaurantsWithMealsFromTodaysMenu();
     }
 
     public Restaurant create(Restaurant restaurant) {
