@@ -7,6 +7,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import ru.neustupov.restvoting.model.Restaurant;
+import ru.neustupov.restvoting.to.RestaurantWithTodaysMenu;
 import ru.neustupov.restvoting.to.RestaurantWithVotes;
 
 import java.net.URI;
@@ -28,6 +29,12 @@ public class AdminRestaurantRestController extends AbstractRestaurantController 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public List<RestaurantWithVotes> getAll() {
         return super.getAll();
+    }
+
+    @Override
+    @GetMapping(value = "/all", produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<RestaurantWithTodaysMenu> getAllRestaurantsWithMealsFromTodaysMenu() {
+        return super.getAllRestaurantsWithMealsFromTodaysMenu();
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
