@@ -4,6 +4,7 @@ import ru.neustupov.restvoting.model.Menu;
 import ru.neustupov.restvoting.util.exception.NotFoundException;
 
 import java.time.LocalDate;
+import java.util.Collection;
 import java.util.List;
 
 public interface MenuService {
@@ -19,6 +20,8 @@ public interface MenuService {
     List<Menu> getAll(int restId);
 
     Menu getTodaysMenuWithMeals(int id);
+
+    Collection<Menu> findAllTodaysMenus();
 
     List<Menu> getBetweenDates(LocalDate startDate, LocalDate endDate, int userId);
 }
