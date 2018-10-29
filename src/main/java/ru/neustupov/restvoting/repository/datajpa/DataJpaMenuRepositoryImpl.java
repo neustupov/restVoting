@@ -7,6 +7,7 @@ import ru.neustupov.restvoting.model.Menu;
 import ru.neustupov.restvoting.repository.MenuRepository;
 
 import java.time.LocalDate;
+import java.util.Collection;
 import java.util.List;
 
 @Repository
@@ -49,6 +50,11 @@ public class DataJpaMenuRepositoryImpl implements MenuRepository {
     @Override
     public Menu findByRestaurantIdAndAddDate(int restId, LocalDate currDate) {
         return crudMenuRepository.findByRestaurantIdAndAddDate(restId, currDate);
+    }
+
+    @Override
+    public Collection<Menu> findAllTodaysMenus(LocalDate currDate) {
+        return crudMenuRepository.findAllTodaysMenus(currDate);
     }
 
     @Override
