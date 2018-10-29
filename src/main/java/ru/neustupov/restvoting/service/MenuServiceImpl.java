@@ -8,6 +8,7 @@ import ru.neustupov.restvoting.repository.MenuRepository;
 import ru.neustupov.restvoting.util.exception.NotFoundException;
 
 import java.time.LocalDate;
+import java.util.Collection;
 import java.util.List;
 
 import static ru.neustupov.restvoting.util.ValidationUtil.checkNotFoundWithId;
@@ -54,6 +55,11 @@ public class MenuServiceImpl implements MenuService {
     @Override
     public Menu getTodaysMenuWithMeals(int restId) {
         return repository.findByRestaurantIdAndAddDate(restId, LocalDate.now());
+    }
+
+    @Override
+    public Collection<Menu> findAllTodaysMenus() {
+        return repository.findAllTodaysMenus(LocalDate.now());
     }
 
     @Override
