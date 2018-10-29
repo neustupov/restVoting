@@ -5,6 +5,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import ru.neustupov.restvoting.model.Vote;
 import ru.neustupov.restvoting.repository.VoteRepository;
+import ru.neustupov.restvoting.to.VoteCount;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -68,6 +69,11 @@ public class DataJpaVoteRepositoryImpl implements VoteRepository {
 
     public List<Vote> getTodaysVotesOfAuthUserAndRest(int userId, int restId) {
         return crudVoteRepository.getTodaysVotesOfAuthUserAndRest(userId, restId);
+    }
+
+    @Override
+    public List<VoteCount> getVoteCountForCurrentDate() {
+        return crudVoteRepository.getVoteCountForCurrentDate();
     }
 
     @Override
