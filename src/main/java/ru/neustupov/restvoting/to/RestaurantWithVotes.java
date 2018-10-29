@@ -1,6 +1,7 @@
 package ru.neustupov.restvoting.to;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import ru.neustupov.restvoting.model.AbstractNamedEntity;
 import ru.neustupov.restvoting.model.Menu;
@@ -13,6 +14,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import java.util.Set;
 
+@NoArgsConstructor
 @Entity
 @Table(name = "restaurants")
 public class RestaurantWithVotes extends AbstractNamedEntity {
