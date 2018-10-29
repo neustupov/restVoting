@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
 import ru.neustupov.restvoting.model.Vote;
+import ru.neustupov.restvoting.to.VoteCount;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -47,6 +48,9 @@ public interface CrudVoteRepository extends JpaRepository<Vote, Integer> {
     @Query("SELECT v FROM Vote v WHERE v.user.id=:userId AND v.restaurant.id=:restId AND v.date=CURRENT_DATE")
     List<Vote> getTodaysVotesOfAuthUserAndRest(@Param("userId") int userId,
                                                @Param("restId") int restId);
+
+    @Query("SELECT NEW ru.neustupov.restvoting.to.VoteCount(v.restaurant.id, count (v.id)) FROM Vote v WHERE v.date=CURRENT_DATE GROUP BY v.restaurant.id")
+    List<VoteCount> getVoteCountForCurrentDate();
 
     @SuppressWarnings("JpaQlInspection")
     @Query("SELECT DISTINCT v from Vote v WHERE v.restaurant.id=:restId AND v.date BETWEEN :startDate AND :endDate ORDER BY v.date DESC")
