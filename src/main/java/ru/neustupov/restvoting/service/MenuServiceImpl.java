@@ -58,11 +58,6 @@ public class MenuServiceImpl implements MenuService {
     }
 
     @Override
-    public Collection<Menu> findAllTodaysMenus() {
-        return repository.findAllTodaysMenus(LocalDate.now());
-    }
-
-    @Override
     public List<Menu> getBetweenDates(LocalDate startDate, LocalDate endDate, int restId) {
         Assert.notNull(startDate, "startDate must not be null");
         Assert.notNull(endDate, "endDate  must not be null");
