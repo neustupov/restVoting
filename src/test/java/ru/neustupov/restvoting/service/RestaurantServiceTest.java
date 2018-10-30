@@ -6,14 +6,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.CacheManager;
 import org.springframework.dao.DataAccessException;
 import ru.neustupov.restvoting.model.Restaurant;
+import ru.neustupov.restvoting.to.RestaurantWithTodaysMenu;
 import ru.neustupov.restvoting.util.exception.NotFoundException;
 
 import javax.validation.ConstraintViolationException;
 import java.util.List;
 
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.hasItem;
+import static org.hamcrest.Matchers.hasSize;
 import static ru.neustupov.restvoting.RestaurantTestData.*;
 
-public class RestaurantServiceTest extends AbstractServiceTest{
+public class RestaurantServiceTest extends AbstractServiceTest {
 
     @Autowired
     private RestaurantService service;
@@ -31,7 +35,7 @@ public class RestaurantServiceTest extends AbstractServiceTest{
         Restaurant newRestaurant = new Restaurant(null, "New");
         Restaurant created = service.create(newRestaurant);
         newRestaurant.setId(created.getId());
-        assertMatch(service.getAll(), RUSSIA, UKRAINE, U_KOLYANA, ALMAZ, FART,  newRestaurant);
+        assertMatch(service.getAll(), RUSSIA, UKRAINE, U_KOLYANA, ALMAZ, FART, newRestaurant);
     }
 
     @Test(expected = DataAccessException.class)
@@ -73,6 +77,13 @@ public class RestaurantServiceTest extends AbstractServiceTest{
     public void getAll() throws Exception {
         List<Restaurant> all = service.getAll();
         assertMatch(all, RUSSIA, UKRAINE, U_KOLYANA, ALMAZ, FART);
+    }
+
+    @Test
+    public void getAllRestaurantsWithMealsFromTodaysMenu() throws Exception {
+        List<RestaurantWithTodaysMenu> list = service.getAllRestaurantsWithMealsFromTodaysMenu();
+        assertThat(list, hasSize(5));
+        assertThat(list, hasItem(RESTAURANT_TO));
     }
 
     @Test

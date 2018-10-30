@@ -42,11 +42,6 @@ public abstract class AbstractVoteController {
         return service.getAll();
     }
 
-    public List<Vote> getAllByRest(int restId) {
-        log.info("getAllByRest {}", restId);
-        return service.getAllByRest(restId);
-    }
-
     public Vote create(Vote vote, int restId) {
         int userId = AuthorizedUser.get().getId();
         checkNew(vote);

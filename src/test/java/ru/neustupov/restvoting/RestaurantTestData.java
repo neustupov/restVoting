@@ -1,7 +1,9 @@
 package ru.neustupov.restvoting;
 
 import org.springframework.test.web.servlet.ResultMatcher;
+import ru.neustupov.restvoting.model.Meal;
 import ru.neustupov.restvoting.model.Restaurant;
+import ru.neustupov.restvoting.to.RestaurantWithTodaysMenu;
 
 import java.util.Arrays;
 
@@ -25,6 +27,9 @@ public class RestaurantTestData {
     public static final Restaurant U_KOLYANA = new Restaurant(U_KOLYANA_ID, "U Kolyana");
     public static final Restaurant ALMAZ = new Restaurant(ALMAZ_ID, "Almaz");
     public static final Restaurant FART = new Restaurant(FART_ID, "Fart");
+
+    public static final RestaurantWithTodaysMenu RESTAURANT_TO = new RestaurantWithTodaysMenu(100002, "Russia", 1,
+            Arrays.asList(new Meal(100020, "Mango", 100)));
 
     public static void assertMatch(Restaurant actual, Restaurant expected) {
         assertThat(actual).isEqualToIgnoringGivenFields(expected, "menus", "votes");

@@ -21,7 +21,5 @@ public interface MenuService {
 
     Menu getTodaysMenuWithMeals(int id);
 
-    Collection<Menu> findAllTodaysMenus();
-
     List<Menu> getBetweenDates(LocalDate startDate, LocalDate endDate, int userId);
 }
