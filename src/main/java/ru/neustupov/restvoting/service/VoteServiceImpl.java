@@ -55,12 +55,6 @@ public class VoteServiceImpl implements VoteService{
         return repository.getAll();
     }
 
-    @Override
-    public List<Vote> getAllByRest(int restId) {
-        Assert.notNull(restId, "restId must not be null");
-        return repository.getAllByRest(restId);
-    }
-
     public Vote getByUserIdAndDate(int userId) {
         Assert.notNull(userId, "userId must not be null");
         return repository.getByUserIdAndDate(userId);

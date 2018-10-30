@@ -17,10 +17,6 @@ public interface VoteRepository {
 
     List<Vote> getAll();
 
-    List<Vote> getAllByRest(int restId);
-
-    Vote getByUserIdAndRestId(int userId, int restId);
-
     Vote getByUserIdAndDate(int userId);
 
     List<Vote> getTodaysVotes();
