@@ -249,8 +249,8 @@ P.P.S.: Asume that your API will be used by a frontend developer to build fronte
        Transfer-Encoding: chunked
        Date: Mon, 29 Oct 2018 19:34:12 GMT
 
-       [{"id":100002,"name":"Russia","numberOfVotes":1,"mealsFromTodaysMenu":[{"id":100020,"name":"Mango","price":100,"menu":{"id":100013,"addDate":"2018-10-29","restaurant":null}}]},{"id":100003,"name":"Ukraine","numberOfVotes":0,"mealsFromTodaysMenu":[]},{"id":100004,"name":"U Kolyana","numberOfVotes":0,"mealsFromTodaysMenu":[]},{"id":100005,"name":"Almaz","numberOfVotes":0,"mealsFromTodaysMenu":[]},{"id":100006,"name":"Fart","numberOfVotes":0,"mealsFromTodaysMenu":[]}]
-       
+       [{"id":100002,"name":"Russia","numberOfVotes":1,"mealsFromTodaysMenu":[{"id":100020,"name":"Mango","price":100}]},{"id":100003,"name":"Ukraine","numberOfVotes":0,"mealsFromTodaysMenu":[]},{"id":100004,"name":"U Kolyana","numberOfVotes":0,"mealsFromTodaysMenu":[]},{"id":100005,"name":"Almaz","numberOfVotes":0,"mealsFromTodaysMenu":[]},{"id":100006,"name":"Fart","numberOfVotes":0,"mealsFromTodaysMenu":[]}]
+
 ### create Restaurant
 #### Request
 
